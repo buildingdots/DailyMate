@@ -1,0 +1,22 @@
+{
+  "name": "dailymate",
+  "version": "1.0.0",
+  "description": "Your Finance Buddy",
+  "scripts": {
+    "start:backend": "cd backend && npm run start",
+    "start:app": "cd app && npm run start",
+    "start:app:ios": "cd app && npm run ios",
+    "start:app:android": "cd app && npm run android",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buildingdots/DailyMate.git"
+  },
+  "author": "sushant.bansal@buildingdots.com",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/buildingdots/DailyMate/issues"
+  },
+  "homepage": "https://github.com/buildingdots/DailyMate#readme"
+}
