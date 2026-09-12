@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed": "#dae2fd", "secondary-container": "#86f2e4", "outline-variant": "#c6c6cd", "error-container": "#ffdad6", "primary": "#000000", "primary-container": "#131b2e", "on-tertiary": "#ffffff", "on-error": "#ffffff", "tertiary-fixed": "#6ffbbe", "error": "#ba1a1a", "background": "#f8f9ff", "outline": "#76777d", "on-tertiary-fixed": "#002113", "on-background": "#0b1c30", "surface": "#f8f9ff", "surface-container-low": "#eff4ff", "surface-container-lowest": "#ffffff", "secondary-fixed": "#89f5e7", "on-tertiary-fixed-variant": "#005236", "surface-container-high": "#dce9ff", "on-secondary-fixed-variant": "#005049", "on-secondary-fixed": "#00201d", "surface-container-highest": "#d3e4fe", "surface-bright": "#f8f9ff", "on-secondary-container": "#006f66", "on-primary": "#ffffff", "surface-variant": "#d3e4fe", "primary-fixed-dim": "#bec6e0", "surface-container": "#e5eeff", "secondary": "#006a61", "on-surface": "#0b1c30", "on-primary-fixed-variant": "#3f465c", "inverse-primary": "#bec6e0", "tertiary-container": "#002113", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#4edea3", "on-surface-variant": "#45464d", "on-primary-fixed": "#131b2e", "tertiary": "#000000", "surface-dim": "#cbdbf5", "on-primary-container": "#7c839b", "on-error-container": "#93000a", "surface-tint": "#565e74", "inverse-surface": "#213145", "on-tertiary-container": "#009668", "secondary-fixed-dim": "#6bd8cb", "inverse-on-surface": "#eaf1ff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "space-xl": "2.25rem", "space-xs": "0.25rem", "gutter": "1rem", "margin": "1.25rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Inter"], "headline-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "label-sm": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"] }, "fontSize": { "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }], "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }] } } } }</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style></head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Go back" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="DailyMate Master Brand Identity &amp; Logo Presentation Sheet. Displays the primary horizontal symbol + wordmark, 3D shadowed mobile app icon, OLED dark mode lockup, vertical stacked version, single-color monochrome black version, and geometric symbol anatomy breakdown with Plus Jakarta Sans typography." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VGe-GDnZG0Ryk7gf_ewNkbAJDlS1FAk6InQucoFLc2O4iVCdhKhP0ymeoRRRA7HhhN0wDPnmybGdBcibzfLQnX1BbZK2yHFABm_BcoDv5JITG2EsjzC63E77sGZyePGEnyGCLldC_Q5OpHYw4RbO0I2SO1roZQWjz-g8JVDLQPlADEACWrVBbg5fLcCGjs9S83wpGt3MVmHQtavPQQmxz2ST_Euxpa4SJECWm2hV3HAMayEaMLoKBbgb3u"/><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate pl-space-xs">App &amp; Home Screen Widgets</h1></div><div class="flex items-center gap-space-xs"><button aria-label="Widget help" class="w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">help_outline</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1XYIXrhYiFwVD3I63BkltTNyXlmA612uM7qb9LfX4U-J4VZyAWyhL9DU2xoNmhwbQxWFgzEDKGp6zYzi9ghhkkKaqYS8oovpwFhVaXxnish4_IVB37US1cUtNJdO7hoQKGC93mzArmPVg1My6-wPoF1pvbexunKdrNO4PoaM6BEmOs79AtCDNdtkKZTCQKFB8DUEmDniPqGGZcQ1RkYDOLlbHn582y5wRvFO0wgN5Ihol1CHlhZXE0wjgKI"/></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 bg-surface pb-safe"><div class="flex flex-col w-full pb-12">
+<!-- Top Banner / Widget Lab Intro -->
+<div class="px-margin pt-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-secondary text-on-secondary">
+<span class="material-symbols-outlined text-[18px]">widgets</span>
+</span>
+<span class="font-label-md text-label-md text-secondary tracking-wider uppercase font-semibold">Home Screen Ecosystem</span>
+</div>
+<span class="font-label-sm text-label-sm px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant font-medium">v3.4 Live Sync</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">App Widgets Studio</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Experience zero-friction finance. Glance, log, and settle bills directly from your device lock screen and home canvas without unlocking the full app.</p>
+</div>
+<!-- Interactive Controls Hub (OS Selector & Display Modes) -->
+<div class="px-margin mt-space-lg flex flex-col gap-space-md">
+<!-- OS Toggle Segment -->
+<div class="bg-surface-container p-1 rounded-full flex items-center shadow-sm">
+<button class="flex-1 py-2 rounded-full font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all duration-200 bg-surface-container-lowest text-on-surface shadow-sm font-semibold" id="btn-os-ios" onclick="switchOS('ios')">
+<span class="material-symbols-outlined text-[18px]">phone_iphone</span>
+<span>iOS 17+ Smart Stacks</span>
+</button>
+<button class="flex-1 py-2 rounded-full font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all duration-200 text-on-surface-variant hover:text-on-surface font-medium" id="btn-os-android" onclick="switchOS('android')">
+<span class="material-symbols-outlined text-[18px]">android</span>
+<span>Material You 14</span>
+</button>
+</div>
+<!-- Live Customizer Bar -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-3 rounded-full bg-surface-container-lowest text-on-surface flex items-center gap-1.5 font-label-md text-label-md shadow-sm transition-all active:scale-95" id="toggle-privacy" onclick="togglePrivacy()">
+<span class="material-symbols-outlined text-[18px]" id="privacy-icon">visibility</span>
+<span id="privacy-label">Hide Balances</span>
+</button>
+<button class="h-9 px-3 rounded-full bg-surface-container-lowest text-on-surface flex items-center gap-1.5 font-label-md text-label-md shadow-sm transition-all active:scale-95" id="toggle-dark" onclick="toggleWidgetTheme()">
+<span class="material-symbols-outlined text-[18px]" id="theme-icon">dark_mode</span>
+<span id="theme-label">OLED Slate</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">HDFC Live</span>
+</div>
+</div>
+</div>
+<!-- Widgets Catalog Stream -->
+<div class="mt-space-lg flex flex-col gap-space-xl px-margin" id="widgets-canvas">
+<!-- SECTION 1: ADD TRANSACTION (QUICK ACTIONS) -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">bolt</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Zero-Friction Fast Logging</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-semibold">2x2 &amp; 4x2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Log on the move. Interactive shortcuts directly launch instant micro-sheets or one-tap preset expenses without loading splash screens.</p>
+<!-- 4x2 Medium Quick Action Widget Card -->
+<div class="widget-frame rounded-[28px] p-space-lg bg-surface-container-lowest shadow-md flex flex-col justify-between relative overflow-hidden transition-all duration-300">
+<!-- Widget Header -->
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">DM</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Quick Action Hub</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">One-Tap OCR</span>
+</div>
+<!-- 4 Action Icons Grid -->
+<div class="grid grid-cols-4 gap-space-sm mb-space-md">
+<button class="flex flex-col items-center gap-1.5 p-2 rounded-2xl bg-surface-container-low hover:bg-surface-container transition active:scale-95 group">
+<span class="w-10 h-10 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">+ Expense</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 p-2 rounded-2xl bg-surface-container-low hover:bg-surface-container transition active:scale-95 group">
+<span class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">+ Income</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 p-2 rounded-2xl bg-surface-container-low hover:bg-surface-container transition active:scale-95 group">
+<span class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Transfer</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 p-2 rounded-2xl bg-primary text-on-primary hover:opacity-90 transition active:scale-95 group shadow-sm">
+<span class="w-10 h-10 rounded-full bg-surface-container-lowest/20 text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">document_scanner</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-primary font-medium">Scan OCR</span>
+</button>
+</div>
+<!-- Rapid Preset Badges -->
+<div class="flex items-center gap-2 overflow-x-auto pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">Fast Repeat:</span>
+<button class="px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1 shrink-0 active:scale-95 transition">
+<span class="material-symbols-outlined text-[14px] text-secondary">lunch_dining</span>
+<span class="font-semibold">Food</span> <span class="maskable-amount">₹120</span>
+</button>
+<button class="px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1 shrink-0 active:scale-95 transition">
+<span class="material-symbols-outlined text-[14px] text-secondary">local_taxi</span>
+<span class="font-semibold">Cab</span> <span class="maskable-amount">₹240</span>
+</button>
+<button class="px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1 shrink-0 active:scale-95 transition">
+<span class="material-symbols-outlined text-[14px] text-secondary">coffee</span>
+<span class="font-semibold">Blue Tokai</span> <span class="maskable-amount">₹190</span>
+</button>
+</div>
+</div>
+<!-- 2x2 Small Widget & Lockscreen Accessory Pair -->
+<div class="grid grid-cols-2 gap-space-md">
+<!-- 2x2 Small Square Widget -->
+<div class="widget-frame rounded-[28px] p-space-md bg-surface-container-lowest shadow-md flex flex-col justify-between aspect-square">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">2×2 Tile</span>
+</div>
+<div class="my-auto py-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Quick Scan</span>
+<span class="font-headline-sm text-headline-sm text-on-surface block leading-tight font-bold">Snap &amp; Auto-Categorize</span>
+</div>
+<button class="w-full py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center gap-1 shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[16px]">camera</span>
+<span>Scan Bill</span>
+</button>
+</div>
+<!-- Lockscreen Circular Complication Preview -->
+<div class="widget-frame rounded-[28px] p-space-md bg-surface-container-low flex flex-col justify-between aspect-square">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Lock Screen</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">lock</span>
+</div>
+<div class="flex flex-col items-center justify-center text-center my-auto">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest flex flex-col items-center justify-center text-on-surface mb-1">
+<span class="material-symbols-outlined text-[20px] text-secondary">add_circle</span>
+<span class="font-label-sm text-[10px] font-bold mt-[-2px]">LOG</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">One-Touch Entry</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant leading-tight">Always-on Display</span>
+</div>
+<span class="text-center font-label-sm text-[10px] text-secondary font-medium">Standby Mode Ready</span>
+</div>
+</div>
+</section>
+<!-- SECTION 2: REMINDERS & URGENT BILLS (NOTIFICATION & DUE GUARD) -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[20px]">notifications_active</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Due Guard &amp; Bill Reminders</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold">Urgent 4x2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zero surprise auto-debits. Keep tabs on high-velocity outflows and split balances with instant direct interactive actions.</p>
+<!-- 4x2 Guard Widget Card -->
+<div class="widget-frame rounded-[28px] p-space-lg bg-surface-container-lowest shadow-md flex flex-col gap-space-md">
+<!-- Widget Status Head -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error animate-ping"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">2 Critical Inbounds Today</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sync: 2m ago</span>
+</div>
+<!-- Item 1: Auto Debit -->
+<div class="p-3 rounded-2xl bg-surface-container-low flex items-center justify-between gap-2">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-xl bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">home_work</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] text-on-surface font-bold truncate">HDFC Rent Auto-Debit</span>
+<span class="font-label-sm text-[10px] px-1.5 py-0.2 rounded bg-error/10 text-error font-bold">24h Left</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Salunkhe Vihar Residency A/C</p>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-headline-sm text-[16px] text-error font-bold tracking-tight maskable-amount">₹18,000</span>
+<button class="mt-1 px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold active:scale-95 shadow-sm">
+              Pay Early
+            </button>
+</div>
+</div>
+<!-- Item 2: Friend Split Overdue -->
+<div class="p-3 rounded-2xl bg-surface-container-low flex items-center justify-between gap-2">
+<div class="flex items-center gap-space-sm min-w-0">
+<img alt="Rahul Verma" class="w-10 h-10 rounded-xl object-cover shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1XYIXrhYiFwVD3I63BkltTNyXlmA612uM7qb9LfX4U-J4VZyAWyhL9DU2xoNmhwbQxWFgzEDKGp6zYzi9ghhkkKaqYS8oovpwFhVaXxnish4_IVB37US1cUtNJdO7hoQKGC93mzArmPVg1My6-wPoF1pvbexunKdrNO4PoaM6BEmOs79AtCDNdtkKZTCQKFB8DUEmDniPqGGZcQ1RkYDOLlbHn582y5wRvFO0wgN5Ihol1CHlhZXE0wjgKI"/>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] text-on-surface font-bold truncate">Rahul Verma</span>
+<span class="font-label-sm text-[10px] px-1.5 py-0.2 rounded bg-outline-variant/30 text-on-surface-variant font-medium">3d Overdue</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Goa Flights split debt</p>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-headline-sm text-[16px] text-secondary font-bold tracking-tight maskable-amount">+₹6,500</span>
+<button class="mt-1 px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold active:scale-95 shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">near_me</span>
+<span>Send Nudge</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: NET WORTH & WEALTH PULSE -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">account_balance</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Net Worth &amp; Wealth Pulse</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-semibold">2x2 &amp; 4x2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Glanceable financial truth. Monitor combined net equity, liquid cushions, and debt ratios at high fidelity.</p>
+<!-- 4x2 Wealth Pulse Widget -->
+<div class="widget-frame rounded-[28px] p-space-lg bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">Total Net Worth</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant cursor-pointer" onclick="togglePrivacy()">lock_clock</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-extrabold tracking-tight maskable-amount">₹4,85,200.00</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm text-label-sm font-bold">+12.4%</span>
+</div>
+</div>
+<!-- Asset Distribution Progress Bar Pill -->
+<div class="mt-space-md">
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary w-[52%] rounded-l-full" title="Liquid Cash"></div>
+<div class="h-full bg-primary-container w-[38%]" title="Protected Assets"></div>
+<div class="h-full bg-tertiary-fixed-dim w-[8%]" title="Peer Receivables"></div>
+<div class="h-full bg-error w-[2%] rounded-r-full" title="Liabilities"></div>
+</div>
+<div class="grid grid-cols-2 gap-y-2 gap-x-4 mt-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Liquid Savings</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold maskable-amount">₹1,85,400</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Investments</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold maskable-amount">₹2,48,500</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Receivables</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold maskable-amount">₹14,500</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Liabilities</span>
+</div>
+<span class="font-label-md text-label-md text-error font-semibold maskable-amount">₹3,200</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: CASH FLOW GRAPH & VELOCITY (INTERACTIVE CHART WIDGET) -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">insights</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Cash Flow &amp; Burn Velocity</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-primary text-on-primary font-semibold">Flagship 4x4</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time financial speedometer. Evaluates daily burn velocity against calendar month progression.</p>
+<!-- 4x4 Large Flagship Widget -->
+<div class="widget-frame rounded-[32px] p-space-lg bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<!-- Top Cash Flow Summary Row -->
+<div class="flex items-start justify-between border-b pb-space-md" style="border-color: rgba(118, 119, 125, 0.12);">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-semibold">October Net Savings</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold tracking-tight maskable-amount">+₹42,150</span>
+<span class="font-label-md text-label-md text-secondary font-bold">(49.6%)</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-semibold">Healthy Pacing</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant mt-1">11 days left</span>
+</div>
+</div>
+<!-- Inflow vs Outflow Metric Pods -->
+<div class="grid grid-cols-2 gap-space-sm my-space-md">
+<div class="p-3 rounded-2xl bg-surface-container-low flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">south_west</span>
+</span>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant block font-medium">Inflows</span>
+<span class="font-headline-sm text-[15px] text-secondary font-bold maskable-amount">+₹85,000</span>
+</div>
+</div>
+<div class="p-3 rounded-2xl bg-surface-container-low flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">north_east</span>
+</span>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant block font-medium">Outflows</span>
+<span class="font-headline-sm text-[15px] text-error font-bold maskable-amount">-₹42,850</span>
+</div>
+</div>
+</div>
+<!-- Inline SVG Sparkline & Safe Velocity Bar Chart -->
+<div class="bg-surface-container-low p-space-md rounded-2xl flex flex-col gap-2">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-semibold">Daily Safe Pace:</span>
+<span class="text-secondary font-bold maskable-amount">₹1,167/day</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-on-surface-variant font-medium">Actual Burn:</span>
+<span class="text-on-surface font-semibold maskable-amount">₹1,382/day</span>
+</div>
+</div>
+<!-- Dynamic SVG Vector Chart representing velocity vs budget ceiling -->
+<div class="w-full h-24 pt-2">
+<svg class="w-full h-full overflow-visible" fill="none" viewbox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="velocityGrad" x1="0" x2="0" y1="0" y2="80">
+<stop stop-color="#006a61" stop-opacity="0.32"></stop>
+<stop offset="1" stop-color="#006a61" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Safe pace dotted baseline -->
+<line stroke="#76777d" stroke-dasharray="4 4" stroke-opacity="0.4" stroke-width="1.5" x1="0" x2="320" y1="45" y2="45"></line>
+<!-- Velocity Area Gradient -->
+<path d="M0,65 Q40,55 80,60 T160,35 T240,42 T320,18 L320,80 L0,80 Z" fill="url(#velocityGrad)"></path>
+<!-- Velocity Line Chart -->
+<path d="M0,65 Q40,55 80,60 T160,35 T240,42 T320,18" stroke="#006a61" stroke-linecap="round" stroke-width="3"></path>
+<!-- Current Day Focal Pulse Point -->
+<circle cx="320" cy="18" fill="#006a61" r="4"></circle>
+<circle class="animate-ping" cx="320" cy="18" fill="#006a61" fill-opacity="0.25" r="8"></circle>
+</svg>
+</div>
+<div class="flex justify-between font-label-sm text-[10px] text-on-surface-variant pt-1">
+<span>Day 1</span>
+<span>Day 10</span>
+<span>Day 20 (Today)</span>
+<span>Day 31</span>
+</div>
+</div>
+<!-- Direct Widget Micro Action -->
+<div class="mt-space-md flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Projection: <strong>₹38,200 surplus</strong></span>
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold active:scale-95 shadow-sm flex items-center gap-1">
+<span>Detailed Graph</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECTION 5: INSTALLATION GUIDE & SMART STACK SETUP -->
+<section class="bg-surface-container rounded-2xl p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">install_mobile</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">How to Pin to Device</h4>
+</div>
+<div class="space-y-space-sm" id="install-instructions">
+<!-- Default iOS steps -->
+<div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">1</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Touch &amp; Hold Home Screen</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Long press any empty area on your phone until apps jiggle.</p>
+</div>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">2</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Tap '+' &amp; Search DailyMate</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Browse through small, medium, or large interactive layouts.</p>
+</div>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">3</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Stack for Smart Rotations</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Combine 'Cash Flow' and 'Bill Reminders' into a single intuitive Smart Stack.</p>
+</div>
+</div>
+</div>
+<button class="w-full py-3 rounded-full bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md active:scale-98 transition" onclick="shareWidgetKit()">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+<span>Export Widget Stack Link</span>
+</button>
+</section>
+</div>
+</div>
+<script>
+  let isPrivacyActive = false;
+  let isOledMode = false;
+  let currentOS = 'ios';
+
+  const rawAmounts = {};
+
+  function initRawValues() {
+    const amountEls = document.querySelectorAll('.maskable-amount');
+    amountEls.forEach((el, index) => {
+      rawAmounts[index] = el.innerText;
+    });
+  }
+  initRawValues();
+
+  function togglePrivacy() {
+    isPrivacyActive = !isPrivacyActive;
+    const icon = document.getElementById('privacy-icon');
+    const label = document.getElementById('privacy-label');
+    const amountEls = document.querySelectorAll('.maskable-amount');
+
+    if (isPrivacyActive) {
+      icon.innerText = 'visibility_off';
+      label.innerText = 'Show Balances';
+      amountEls.forEach(el => {
+        el.innerText = '••••••';
+      });
+    } else {
+      icon.innerText = 'visibility';
+      label.innerText = 'Hide Balances';
+      amountEls.forEach((el, index) => {
+        el.innerText = rawAmounts[index] || el.innerText;
+      });
+    }
+  }
+
+  function toggleWidgetTheme() {
+    isOledMode = !isOledMode;
+    const themeIcon = document.getElementById('theme-icon');
+    const themeLabel = document.getElementById('theme-label');
+    const widgetFrames = document.querySelectorAll('.widget-frame');
+
+    if (isOledMode) {
+      themeIcon.innerText = 'light_mode';
+      themeLabel.innerText = 'Crisp Daylight';
+      widgetFrames.forEach(el => {
+        el.classList.remove('bg-surface-container-lowest', 'text-on-surface');
+        el.classList.add('bg-primary-container', 'text-on-primary');
+        // change internal texts
+        el.querySelectorAll('.text-on-surface').forEach(txt => {
+          txt.classList.remove('text-on-surface');
+          txt.classList.add('text-white');
+        });
+        el.querySelectorAll('.text-on-surface-variant').forEach(txt => {
+          txt.classList.remove('text-on-surface-variant');
+          txt.classList.add('text-primary-fixed-dim');
+        });
+      });
+    } else {
+      themeIcon.innerText = 'dark_mode';
+      themeLabel.innerText = 'OLED Slate';
+      widgetFrames.forEach(el => {
+        el.classList.add('bg-surface-container-lowest', 'text-on-surface');
+        el.classList.remove('bg-primary-container', 'text-on-primary');
+        el.querySelectorAll('.text-white').forEach(txt => {
+          txt.classList.add('text-on-surface');
+          txt.classList.remove('text-white');
+        });
+        el.querySelectorAll('.text-primary-fixed-dim').forEach(txt => {
+          txt.classList.add('text-on-surface-variant');
+          txt.classList.remove('text-primary-fixed-dim');
+        });
+      });
+    }
+  }
+
+  function switchOS(os) {
+    currentOS = os;
+    const btnIos = document.getElementById('btn-os-ios');
+    const btnAndroid = document.getElementById('btn-os-android');
+    const instructions = document.getElementById('install-instructions');
+    const widgetFrames = document.querySelectorAll('.widget-frame');
+
+    if (os === 'android') {
+      btnAndroid.className = 'flex-1 py-2 rounded-full font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all duration-200 bg-surface-container-lowest text-on-surface shadow-sm font-semibold';
+      btnIos.className = 'flex-1 py-2 rounded-full font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all duration-200 text-on-surface-variant hover:text-on-surface font-medium';
+      
+      // Transform card aesthetics to Material You rounded pill style
+      widgetFrames.forEach(frame => {
+        frame.style.borderRadius = '36px';
+      });
+
+      instructions.innerHTML = `
+        <div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">1</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface font-semibold">Touch &amp; Hold Blank Workspace</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Tap the 'Widgets' pop-up icon in the Material Launcher menu.</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">2</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface font-semibold">Select DailyMate Dynamic Tiles</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Colors will instantly adapt to your Android 14 wallpaper palette.</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">3</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface font-semibold">Resizable 2x2 to 5x5 Grid</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Stretch borders horizontally to reveal velocity charts and OCR keys.</p>
+          </div>
+        </div>
+      `;
+    } else {
+      btnIos.className = 'flex-1 py-2 rounded-full font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all duration-200 bg-surface-container-lowest text-on-surface shadow-sm font-semibold';
+      btnAndroid.className = 'flex-1 py-2 rounded-full font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all duration-200 text-on-surface-variant hover:text-on-surface font-medium';
+
+      widgetFrames.forEach(frame => {
+        frame.style.borderRadius = '28px';
+      });
+
+      instructions.innerHTML = `
+        <div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">1</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface font-semibold">Touch &amp; Hold Home Screen</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Long press any empty area on your phone until apps jiggle.</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">2</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface font-semibold">Tap '+' &amp; Search DailyMate</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Browse through small, medium, or large interactive layouts.</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container-lowest rounded-xl flex items-start gap-3">
+          <span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">3</span>
+          <div>
+            <p class="font-label-md text-label-md text-on-surface font-semibold">Stack for Smart Rotations</p>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Combine 'Cash Flow' and 'Bill Reminders' into a single intuitive Smart Stack.</p>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  function shareWidgetKit() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'DailyMate Widgets Setup',
+        text: 'Download interactive widgets for iOS & Android!',
+        url: window.location.href
+      }).catch(() => {});
+    } else {
+      alert('Widget pairing shortcut copied to clipboard!');
+    }
+  }
+</script></main></body></html>

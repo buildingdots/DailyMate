@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><title>DailyMate</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface": "#0b1c30", "tertiary-fixed-dim": "#4edea3", "on-surface-variant": "#45464d", "surface-variant": "#d3e4fe", "on-background": "#0b1c30", "on-tertiary-fixed-variant": "#005236", "primary-fixed": "#dae2fd", "primary": "#000000", "surface": "#f8f9ff", "surface-bright": "#f8f9ff", "tertiary-container": "#002113", "on-secondary": "#ffffff", "outline": "#76777d", "on-tertiary-fixed": "#002113", "surface-container-high": "#dce9ff", "on-primary-fixed": "#131b2e", "surface-container": "#e5eeff", "surface-container-highest": "#d3e4fe", "surface-container-low": "#eff4ff", "secondary": "#006a61", "on-primary-container": "#7c839b", "on-secondary-container": "#006f66", "on-primary": "#ffffff", "primary-fixed-dim": "#bec6e0", "tertiary": "#000000", "on-secondary-fixed": "#00201d", "on-error-container": "#93000a", "inverse-surface": "#213145", "secondary-fixed": "#89f5e7", "on-error": "#ffffff", "secondary-fixed-dim": "#6bd8cb", "on-tertiary": "#ffffff", "error-container": "#ffdad6", "inverse-primary": "#bec6e0", "on-tertiary-container": "#009668", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#3f465c", "background": "#f8f9ff", "surface-dim": "#cbdbf5", "tertiary-fixed": "#6ffbbe", "secondary-container": "#86f2e4", "error": "#ba1a1a", "outline-variant": "#c6c6cd", "primary-container": "#131b2e", "inverse-on-surface": "#eaf1ff", "surface-tint": "#565e74", "on-secondary-fixed-variant": "#005049" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-lg": "1.5rem", "space-xs": "0.25rem", "gutter": "1rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-xl": "2.25rem" }, fontFamily: { "display-lg-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-lg": ["Inter"], "body-sm": ["Inter"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Inter"], "label-sm": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"] }, fontSize: { "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.025em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }], "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }], "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "700" }], "display-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.03em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }] } } } }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin flex items-center justify-between"><button aria-label="Cancel" class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface px-2 py-1.5 transition-colors" onclick="history.back()">Cancel</button><h1 class="font-headline-sm text-[18px] font-bold text-on-surface tracking-tight">Create New Budget</h1><button aria-label="Save budget" class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold hover:opacity-90 active:scale-95 transition-all">Save</button></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface"><div class="flex flex-col w-full px-margin pb-28 pt-2 space-y-space-md">
+<!-- Header Actions Sub-bar -->
+
+<!-- Primary Amount Input Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-28 h-28 bg-surface-container-low rounded-full pointer-events-none"></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline mb-space-xs">Target Ceiling</span>
+<div class="flex items-baseline justify-center gap-1 w-full my-1">
+<span class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold">₹</span>
+<input aria-label="Budget Amount" class="font-display-lg-mobile text-display-lg-mobile text-on-surface font-bold bg-transparent text-center focus:outline-none w-64 max-w-full" id="budget-amount-input" inputmode="decimal" type="text" value="10,000.00">
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">tune</span>
+      Monthly spending limit
+    </p>
+<!-- Quick Increment Pills -->
+<div class="flex items-center gap-space-xs mt-space-md pt-space-xs">
+<button class="bg-surface-container-low text-on-surface px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-transform active:scale-95" onclick="adjustAmount(1000)" type="button">+₹1k</button>
+<button class="bg-surface-container-low text-on-surface px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-transform active:scale-95" onclick="adjustAmount(5000)" type="button">+₹5k</button>
+<button class="bg-surface-container-low text-on-surface px-3 py-1.5 rounded-full font-label-sm text-label-sm transition-transform active:scale-95" onclick="adjustAmount(10000)" type="button">+₹10k</button>
+<button class="bg-surface-container-low text-outline px-2.5 py-1.5 rounded-full font-label-sm text-label-sm" onclick="resetAmount()" type="button">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Dynamic Safe Burn Rate Preview Box -->
+<div class="bg-surface-container-high/60 rounded-DEFAULT p-space-md flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-1">
+<span class="font-label-sm text-label-sm text-on-secondary-container uppercase tracking-wider">Pace Projection</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug" id="safe-rate-text">
+        At ₹10,000/mo, safe burn rate is <span class="font-semibold text-secondary">₹333/day</span>.
+      </p>
+</div>
+</div>
+<!-- Budget Identity Section -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm space-y-space-md">
+<!-- Budget Name -->
+<div class="flex flex-col space-y-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="budget-name">Budget Name</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-[20px] text-outline pointer-events-none">edit_note</span>
+<input class="w-full bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md pl-11 pr-4 py-3 rounded-DEFAULT focus:outline-none" id="budget-name" placeholder="e.g. Food &amp; Dining, Weekend Fun" type="text">
+</div>
+</div>
+<!-- Category Selector -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Linked Categories</label>
+<span class="font-body-sm text-body-sm text-outline" id="category-count">1 Selected</span>
+</div>
+<div class="flex flex-wrap gap-2 pt-1" id="category-container">
+<button class="cat-chip inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md bg-on-surface text-surface-container-lowest transition-all" data-selected="true" onclick="toggleCategory(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+          Food &amp; Dining
+        </button>
+<button class="cat-chip inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant transition-all" data-selected="false" onclick="toggleCategory(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">local_grocery_store</span>
+          Groceries
+        </button>
+<button class="cat-chip inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant transition-all" data-selected="false" onclick="toggleCategory(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">shopping_bag</span>
+          Shopping
+        </button>
+<button class="cat-chip inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant transition-all" data-selected="false" onclick="toggleCategory(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">movie</span>
+          Entertainment
+        </button>
+<button class="cat-chip inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant transition-all" data-selected="false" onclick="toggleCategory(this)" type="button">
+<span class="material-symbols-outlined text-[16px]">flight_takeoff</span>
+          Travel
+        </button>
+</div>
+</div>
+</div>
+<!-- Time Period Selector -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Recurrence Period</label>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Renews 1st of month</span>
+</div>
+<div class="bg-surface-container-low p-1 rounded-full grid grid-cols-4 gap-1 text-center" id="period-selector">
+<button class="period-btn py-2 rounded-full font-label-md text-label-md bg-on-surface text-surface-container-lowest font-medium transition-all shadow-sm" onclick="selectPeriod(this, 'monthly')" type="button">Monthly</button>
+<button class="period-btn py-2 rounded-full font-label-md text-label-md text-on-surface-variant transition-all" onclick="selectPeriod(this, 'weekly')" type="button">Weekly</button>
+<button class="period-btn py-2 rounded-full font-label-md text-label-md text-on-surface-variant transition-all" onclick="selectPeriod(this, 'bi-weekly')" type="button">Bi-Weekly</button>
+<button class="period-btn py-2 rounded-full font-label-md text-label-md text-on-surface-variant transition-all" onclick="selectPeriod(this, 'cycle')" type="button">Custom</button>
+</div>
+<!-- Cycle Helper Subtext -->
+<div class="pt-1 flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm" id="cycle-meta">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">calendar_month</span>
+        Standard calendar monthly cycle
+      </span>
+<button class="text-secondary font-medium font-label-sm text-label-sm" type="button">Customize</button>
+</div>
+</div>
+<!-- Account Scope -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm space-y-space-sm">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Account Scope</label>
+<div class="grid grid-cols-1 gap-2" id="scope-selector">
+<label class="flex items-center justify-between p-3.5 rounded-DEFAULT bg-surface-container-low cursor-pointer transition-colors" onclick="highlightScope(this)">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[22px]">account_balance_wallet</span>
+<div>
+<div class="font-label-md text-label-md text-on-surface">All Connected Accounts</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Aggregate deductions across 4 accounts</div>
+</div>
+</div>
+<input checked="" class="w-4 h-4 accent-secondary" name="account_scope" type="radio" value="all">
+</label>
+<label class="flex items-center justify-between p-3.5 rounded-DEFAULT bg-surface cursor-pointer transition-colors" onclick="highlightScope(this)">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-[22px]">credit_card</span>
+<div>
+<div class="font-label-md text-label-md text-on-surface">HDFC Salary &amp; Cards only</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Exclude savings and emergency reserves</div>
+</div>
+</div>
+<input class="w-4 h-4 accent-secondary" name="account_scope" type="radio" value="hdfc">
+</label>
+</div>
+</div>
+<!-- Smart Threshold Alerts & Rollover -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm space-y-space-md">
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Alert Thresholds</label>
+<span class="font-body-sm text-body-sm text-secondary font-semibold" id="threshold-val">80% &amp; 100%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">DailyMate will proactively ping you before you overspend.</p>
+<div class="flex items-center gap-2">
+<button class="threshold-chip px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-on-surface text-surface-container-lowest transition-all" onclick="toggleThreshold(this)" type="button">
+          At 50%
+        </button>
+<button class="threshold-chip px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-on-surface text-surface-container-lowest transition-all" onclick="toggleThreshold(this)" type="button">
+          At 80% (Warning)
+        </button>
+<button class="threshold-chip px-3.5 py-1.5 rounded-full font-label-sm text-label-sm bg-on-surface text-surface-container-lowest transition-all" onclick="toggleThreshold(this)" type="button">
+          At 100% (Ceiling)
+        </button>
+</div>
+</div>
+<div class="h-px bg-surface-container-low w-full"></div>
+<!-- Rollover Switch -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col pr-4">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Rollover Leftover Balance</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Carries surplus forward to give you a bonus next month.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" id="rollover-toggle" type="checkbox">
+<div class="w-12 h-7 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+<!-- Sticky Bottom CTA -->
+<div class="fixed bottom-0 inset-x-0 p-margin bg-surface/90 backdrop-blur-md z-40 max-w-md mx-auto">
+<button class="w-full py-4 rounded-full bg-on-surface text-surface-container-lowest font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-lg active:scale-[0.99] transition-transform" id="create-budget-btn" onclick="handleCreateBudget()" type="button">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim">check_circle</span>
+      Create &amp; Activate Budget
+    </button>
+</div>
+</div>
+<script>
+  function parseAmount(val) {
+    const clean = val.replace(/[^0-9.]/g, '');
+    const num = parseFloat(clean);
+    return isNaN(num) ? 0 : num;
+  }
+
+  function formatINR(val) {
+    return val.toLocaleString('en-IN', {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
+    });
+  }
+
+  function updatePacePreview(amount) {
+    const daily = Math.round(amount / 30);
+    const safeText = document.getElementById('safe-rate-text');
+    if (safeText) {
+      safeText.innerHTML = `At ₹${formatINR(amount)}/mo, safe burn rate is <span class="font-semibold text-secondary">₹${daily.toLocaleString('en-IN')}/day</span>.`;
+    }
+  }
+
+  function adjustAmount(delta) {
+    const input = document.getElementById('budget-amount-input');
+    const current = parseAmount(input.value);
+    const updated = current + delta;
+    input.value = formatINR(updated);
+    updatePacePreview(updated);
+  }
+
+  function resetAmount() {
+    const input = document.getElementById('budget-amount-input');
+    input.value = '10,000.00';
+    updatePacePreview(10000);
+  }
+
+  const amountInput = document.getElementById('budget-amount-input');
+  if (amountInput) {
+    amountInput.addEventListener('input', (e) => {
+      const val = parseAmount(e.target.value);
+      updatePacePreview(val);
+    });
+  }
+
+  function toggleCategory(btn) {
+    const isSelected = btn.getAttribute('data-selected') === 'true';
+    if (isSelected) {
+      btn.setAttribute('data-selected', 'false');
+      btn.classList.remove('bg-on-surface', 'text-surface-container-lowest');
+      btn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+    } else {
+      btn.setAttribute('data-selected', 'true');
+      btn.classList.add('bg-on-surface', 'text-surface-container-lowest');
+      btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+    }
+    const count = document.querySelectorAll('#category-container button[data-selected="true"]').length;
+    document.getElementById('category-count').textContent = `${count} Selected`;
+  }
+
+  function selectPeriod(btn, type) {
+    const buttons = document.querySelectorAll('.period-btn');
+    buttons.forEach(b => {
+      b.classList.remove('bg-on-surface', 'text-surface-container-lowest', 'shadow-sm');
+      b.classList.add('text-on-surface-variant');
+    });
+    btn.classList.add('bg-on-surface', 'text-surface-container-lowest', 'shadow-sm');
+    btn.classList.remove('text-on-surface-variant');
+
+    const meta = document.getElementById('cycle-meta');
+    if (type === 'cycle') {
+      meta.innerHTML = `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-secondary">sync_alt</span>Salary cycle: 25th to 24th</span><button type="button" class="text-secondary font-medium font-label-sm text-label-sm">Edit Dates</button>`;
+    } else if (type === 'weekly') {
+      meta.innerHTML = `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-outline">calendar_view_week</span>Renews every Monday morning</span><button type="button" class="text-secondary font-medium font-label-sm text-label-sm">Change Day</button>`;
+    } else {
+      meta.innerHTML = `<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-outline">calendar_month</span>Standard calendar monthly cycle</span><button type="button" class="text-secondary font-medium font-label-sm text-label-sm">Customize</button>`;
+    }
+  }
+
+  function highlightScope(labelElement) {
+    const container = document.getElementById('scope-selector');
+    container.querySelectorAll('label').forEach(lbl => {
+      lbl.classList.remove('bg-surface-container-low');
+      lbl.classList.add('bg-surface');
+      const icon = lbl.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.classList.remove('text-secondary');
+        icon.classList.add('text-outline');
+      }
+    });
+    labelElement.classList.add('bg-surface-container-low');
+    labelElement.classList.remove('bg-surface');
+    const activeIcon = labelElement.querySelector('.material-symbols-outlined');
+    if (activeIcon) {
+      activeIcon.classList.add('text-secondary');
+      activeIcon.classList.remove('text-outline');
+    }
+  }
+
+  function toggleThreshold(btn) {
+    if (btn.classList.contains('bg-on-surface')) {
+      btn.classList.remove('bg-on-surface', 'text-surface-container-lowest');
+      btn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+    } else {
+      btn.classList.add('bg-on-surface', 'text-surface-container-lowest');
+      btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+    }
+  }
+
+  function handleCreateBudget() {
+    const btn = document.getElementById('create-budget-btn');
+    btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span> Setting up Budget...`;
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim">done</span> Activated!`;
+      setTimeout(() => history.back(), 700);
+    }, 800);
+  }
+</script></main>
+
+</body></html>

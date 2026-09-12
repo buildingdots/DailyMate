@@ -1,0 +1,149 @@
+---
+description: Architecture Principals
+alwaysApply: true
+---
+### Rule 1: Domain Ownership
+
+Every entity must own its:
+
+* Data model
+* Validation rules
+* Business logic
+* Use cases
+* Repository contract
+* Domain-specific errors
+* Tests
+
+No entity may depend directly on another entity's internal implementation.
+
+### Rule 2: UI Is Not Business Logic
+
+UI components must never contain:
+
+* Database queries
+* Financial calculations
+* Authentication logic
+* Budget calculation rules
+* Transaction posting logic
+* Debt or balance mutation logic
+* Reminder scheduling logic
+* AI business decisions
+
+UI components should only handle:
+
+* Rendering
+* User interaction
+* Local presentation state
+* Form state
+* Calling application use cases
+* Displaying loading, success, and error states
+
+### Rule 3: Use Cases Are the Application Entry Point
+
+All meaningful business actions must pass through application use cases.
+
+Examples:
+
+```text
+CreateExpense
+CreateIncome
+TransferMoney
+CreateBudget
+RecordGoalContribution
+CreatePlannedPayment
+MarkPlannedPaymentAsPaid
+CreateReminder
+UpdateUserPreferences
+```
+
+Do not allow screens to directly manipulate domain entities or database records.
+
+### Rule 4: Dependency Direction
+
+Dependencies must point inward toward stable business rules.
+
+```text
+Presentation
+    ↓
+Application / Use Cases
+    ↓
+Domain
+    ↑
+Infrastructure
+```
+
+Infrastructure implements interfaces defined by the domain or application layers.
+
+The domain must not depend on:
+
+* React Native
+* ORM implementations
+* HTTP clients
+* AI SDKs
+* Platform notification APIs
+
+### Rule 5: No Circular Dependencies
+
+The following is prohibited:
+
+```text
+Transactions → Budgets → Accounts → Transactions
+```
+
+Instead, use:
+
+* Explicit application orchestration
+* Domain events
+* Repository interfaces
+* Read models
+* Query services
+
+### Rule 6: Financial Data Must Be Accurate
+
+Never use floating-point numbers for monetary calculations.
+
+Use:
+
+* Integer minor units, such as paise, wherever possible, or
+* A precise decimal representation
+* Library FinanceJS for every financial calculations
+
+Example:
+
+```ts
+type Money = {
+  amountMinor: bigint | number;
+  currency: string;
+};
+```
+
+If using JavaScript / TypeScript, define one consistent money strategy and use it everywhere.
+
+Never mix:
+
+```ts
+number // for some money fields
+string // for others
+```
+
+without an explicit conversion boundary.
+
+### Rule 7: No Silent Financial Mutation
+
+Any operation that changes financial state must be:
+
+* Explicit
+* Validated
+* Traceable
+* Transactional where required
+* Idempotent where retryable
+
+Examples:
+
+* Creating an expense
+* Editing an expense amount
+* Deleting a transaction
+* Transferring money
+* Marking a planned payment as paid
+* Recording a goal contribution
+* Updating an account balance

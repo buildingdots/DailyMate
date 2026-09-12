@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><title>DailyMate</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface": "#0b1c30", "tertiary-fixed-dim": "#4edea3", "on-surface-variant": "#45464d", "surface-variant": "#d3e4fe", "on-background": "#0b1c30", "on-tertiary-fixed-variant": "#005236", "primary-fixed": "#dae2fd", "primary": "#000000", "surface": "#f8f9ff", "surface-bright": "#f8f9ff", "tertiary-container": "#002113", "on-secondary": "#ffffff", "outline": "#76777d", "on-tertiary-fixed": "#002113", "surface-container-high": "#dce9ff", "on-primary-fixed": "#131b2e", "surface-container": "#e5eeff", "surface-container-highest": "#d3e4fe", "surface-container-low": "#eff4ff", "secondary": "#006a61", "on-primary-container": "#7c839b", "on-secondary-container": "#006f66", "on-primary": "#ffffff", "primary-fixed-dim": "#bec6e0", "tertiary": "#000000", "on-secondary-fixed": "#00201d", "on-error-container": "#93000a", "inverse-surface": "#213145", "secondary-fixed": "#89f5e7", "on-error": "#ffffff", "secondary-fixed-dim": "#6bd8cb", "on-tertiary": "#ffffff", "error-container": "#ffdad6", "inverse-primary": "#bec6e0", "on-tertiary-container": "#009668", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#3f465c", "background": "#f8f9ff", "surface-dim": "#cbdbf5", "tertiary-fixed": "#6ffbbe", "secondary-container": "#86f2e4", "error": "#ba1a1a", "outline-variant": "#c6c6cd", "primary-container": "#131b2e", "inverse-on-surface": "#eaf1ff", "surface-tint": "#565e74", "on-secondary-fixed-variant": "#005049" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-lg": "1.5rem", "space-xs": "0.25rem", "gutter": "1rem", "margin": "1.25rem", "space-md": "1rem", "space-sm": "0.5rem", "space-xl": "2.25rem" }, fontFamily: { "display-lg-mobile": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-lg": ["Inter"], "body-sm": ["Inter"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Inter"], "label-sm": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"] }, fontSize: { "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.025em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "400" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }], "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }], "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "700" }], "display-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.03em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }] } } } }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container active:scale-95 transition-all text-on-surface" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><h1 class="font-headline-sm text-[20px] font-bold text-on-surface tracking-tight">Budget Detail</h1></div><div class="flex items-center gap-space-xs"><button aria-label="Settings and options" class="w-9 h-9 rounded-full hover:bg-surface-container-low text-on-surface flex items-center justify-center active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">tune</span></button><button aria-label="Edit budget" class="w-9 h-9 rounded-full hover:bg-surface-container-low text-on-surface flex items-center justify-center active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">edit</span></button><img alt="Alex Morgan avatar" class="w-8 h-8 rounded-full object-cover shadow-[0_1px_4px_rgba(0,0,0,0.06)] ml-1" src="https://lh3.googleusercontent.com/aida/AEtjO1XYIXrhYiFwVD3I63BkltTNyXlmA612uM7qb9LfX4U-J4VZyAWyhL9DU2xoNmhwbQxWFgzEDKGp6zYzi9ghhkkKaqYS8oovpwFhVaXxnish4_IVB37US1cUtNJdO7hoQKGC93mzArmPVg1My6-wPoF1pvbexunKdrNO4PoaM6BEmOs79AtCDNdtkKZTCQKFB8DUEmDniPqGGZcQ1RkYDOLlbHn582y5wRvFO0wgN5Ihol1CHlhZXE0wjgKI"></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface"><div class="flex flex-col w-full px-margin pb-space-xl space-y-space-md">
+<!-- Top In-Context Bar Actions (Sub-header) -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Monthly Cycle • 14 Days Left</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Settings and options" class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+<button aria-label="Edit budget" class="w-9 h-9 rounded-full bg-surface-container-low text-on-surface flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</div>
+<!-- Primary Hero Card: Budget Status -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col space-y-space-md relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold tracking-wide">Category Envelope</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Food &amp; Dining</h2>
+</div>
+<div class="flex items-center gap-1 px-space-sm py-1 bg-amber-50 rounded-full text-amber-800 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold tracking-tight">85% Used</span>
+</div>
+</div>
+<!-- Metric Breakdown -->
+<div class="grid grid-cols-3 gap-space-sm pt-space-xs">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Spent</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">₹6,800</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Remaining</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-semibold tracking-tight">₹1,200</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Cap</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant font-semibold tracking-tight">₹8,000</span>
+</div>
+</div>
+<!-- Visual Progress Meter -->
+<div class="space-y-space-xs pt-1">
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-amber-500 rounded-full transition-all duration-700" style="width: 85%;"></div>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-sm text-body-sm pt-0.5">
+<span class="flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px] text-amber-600">warning</span>
+          Nearing monthly threshold
+        </span>
+<span class="font-semibold text-on-surface">₹1,200 cushion</span>
+</div>
+</div>
+</section>
+<!-- Safe Pacing Gauge & Projection -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Safe Pacing Velocity</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Calibrated for remaining 14 days in October</p>
+</div>
+<div class="p-2 rounded-full bg-surface-container-low text-secondary">
+<span class="material-symbols-outlined text-[20px]">speed</span>
+</div>
+</div>
+<!-- Pacing Pill Highlight -->
+<div class="p-space-md rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">lock_clock</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase tracking-wider">Suggested Velocity</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">₹85.70 <span class="font-body-sm text-body-sm font-normal text-on-surface-variant">/ day</span></span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 bg-surface-container-lowest text-secondary font-semibold rounded-full shadow-sm">
+        Steady
+      </span>
+</div>
+<!-- Inline Trend & Chart Visualizer -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex justify-between items-center font-label-sm text-label-sm text-on-surface-variant">
+<span class="">Cycle Trend (Oct 1 - Oct 31)</span>
+<span class="flex items-center gap-1.5 text-error font-medium">
+<span class="w-2 h-2 rounded-full bg-error"></span> Projected: ₹8,450 (+₹450)
+        </span>
+</div>
+<!-- Compact Projection SVG Line Chart -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-end relative h-32 overflow-hidden">
+<svg class="w-full h-24 stroke-current overflow-visible" fill="none" viewBox="0 0 320 80">
+<!-- Budget Limit Baseline (₹8,000) -->
+<line stroke="#c6c6cd" stroke-dasharray="4 4" stroke-width="1.5" x1="0" x2="320" y1="26" y2="26"></line>
+<text class="fill-outline text-[10px] font-sans font-semibold" x="4" y="22">CAP ₹8,000</text>
+<!-- Spend Curve to Date (0 -> Day 17) -->
+<path d="M0,74 C30,70 60,62 100,52 C130,44 150,38 180,32" stroke="#006a61" stroke-linecap="round" stroke-width="3"></path>
+<!-- Trajectory Projection (Day 17 -> 31) Overspending -->
+<path d="M180,32 C220,24 260,18 320,12" stroke="#ba1a1a" stroke-dasharray="3 3" stroke-linecap="round" stroke-width="2"></path>
+<!-- Current Day Pinpoint Marker -->
+<circle class="fill-secondary stroke-surface-container-lowest" cx="180" cy="32" r="5" stroke-width="2"></circle>
+</svg>
+<div class="flex justify-between text-on-surface-variant font-label-sm text-label-sm pt-1">
+<span class="">Day 1</span>
+<span class="font-semibold text-secondary">Today (Day 17)</span>
+<span class="">Day 31</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Action Shortcuts -->
+<section class="space-y-space-xs">
+<h3 class="font-label-lg text-label-lg text-on-surface font-semibold px-1">Quick Actions</h3>
+<div class="grid grid-cols-3 gap-space-sm">
+<button class="flex flex-col items-center justify-center p-space-md rounded bg-primary text-on-primary shadow-sm active:scale-95 transition-transform text-center space-y-1">
+<span class="material-symbols-outlined text-[22px]">add_circle</span>
+<span class="font-label-sm text-label-sm font-semibold leading-tight">Add Expense</span>
+</button>
+<button class="flex flex-col items-center justify-center p-space-md rounded bg-surface-container-lowest text-on-surface shadow-sm active:scale-95 transition-transform text-center space-y-1">
+<span class="material-symbols-outlined text-[22px] text-secondary">tune</span>
+<span class="font-label-sm text-label-sm font-semibold leading-tight">Adjust Limit</span>
+</button>
+<button class="flex flex-col items-center justify-center p-space-md rounded bg-surface-container-lowest text-on-surface shadow-sm active:scale-95 transition-transform text-center space-y-1">
+<span class="material-symbols-outlined text-[22px] text-outline">notifications_paused</span>
+<span class="font-label-sm text-label-sm font-semibold leading-tight">Pause Alerts</span>
+</button>
+</div>
+</section>
+<!-- Sub-Category & Merchant Breakdown -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Sub-Category Spending</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Where your ₹6,800 went</p>
+</div>
+<span class="material-symbols-outlined text-outline">pie_chart</span>
+</div>
+<!-- Segmented Composition Bar -->
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-secondary transition-all" style="width: 62%;" title="Restaurants: 62%"></div>
+<div class="h-full bg-secondary-fixed-dim transition-all" style="width: 24%;" title="Cafes: 24%"></div>
+<div class="h-full bg-surface-tint transition-all" style="width: 14%;" title="Delivery: 14%"></div>
+</div>
+<!-- Categories Detailed List -->
+<div class="space-y-space-sm pt-space-xs">
+<!-- Item 1 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-secondary shrink-0"></div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Restaurants &amp; Dining Out</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">62% of category budget</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">₹4,200</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-secondary-fixed-dim shrink-0"></div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Coffee &amp; Cafes</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">24% of category budget</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">₹1,650</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-surface-tint shrink-0"></div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Food Delivery (Swiggy/Zomato)</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">14% of category budget</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface font-bold">₹950</span>
+</div>
+</div>
+</section>
+<!-- Connected Payment Methods / Interlinking Banner -->
+<section class="bg-surface-container-low rounded p-space-md flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block font-semibold">Auto-Track Sources</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium truncate">
+        Linked to HDFC Salary Account • Millennia Credit Card
+      </p>
+</div>
+<button aria-label="Manage linked accounts" class="text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</section>
+<!-- Contributing Transactions List -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Transactions</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Recent charges tagged to this envelope</p>
+</div>
+<button class="font-label-md text-label-md text-secondary font-semibold hover:underline">
+        See All (18)
+      </button>
+</div>
+<div class="space-y-space-sm pt-space-xs">
+<!-- Tx 1: Blue Tokai -->
+<div class="flex items-center justify-between py-space-xs active:bg-surface-container-low rounded px-2 transition-colors">
+<div class="flex items-center gap-space-sm">
+<img class="w-11 h-11 rounded-full object-cover shrink-0" data-alt="Close up photograph of rich artisanal pour over coffee cup in a minimalist warm ceramic mug on wooden cafe counter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8GHbUYBEApgN190pIUm1i9QLsx4AcxAbrayRJwyAlLbS8vpne9L7EXB6-lkkg6SqdVFtyD6DsOa9rZ79qrTH3JXRyXJSaCIhrx3CTgp2Kv3h16ZdWaTexQjqTm82HGfJwBJwUMiBf_1SYc2NMXCWz9sLTmCSDkA0DuW8oI4FBNYLYjfy-kqj9woWQmUV07BElRPI8Q-RZma1XVUPWElX1fFQW2pD3ZPvfBueN9M9yvdcXh3GAClS6Pw">
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Blue Tokai Coffee</h4>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Today, 10:14 AM</span>
+<span class="">•</span>
+<span class="text-secondary font-medium">Millennia Card</span>
+</div>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">-₹320</span>
+</div>
+<!-- Tx 2: The Bombay Canteen -->
+<div class="flex items-center justify-between py-space-xs active:bg-surface-container-low rounded px-2 transition-colors">
+<div class="flex items-center gap-space-sm">
+<img class="w-11 h-11 rounded-full object-cover shrink-0" data-alt="Sophisticated gourmet dining table setting with contemporary Indian small plates and atmospheric evening restaurant ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5NGqcsGZnNnUBT2_vl-rYFosCeZo5FeI29o3LiSw84wdG76FvxsmRkY3kOvVTgO-lpFqSS0zguRl_mXxZhI4lFTaHjBpYYhoKzZvKQAFsoXABr4pQtGTxD_IMejImS5XSJSnHs2jgDm4fg1X6D2dlDiCYuTw0Nfmv2v9xSxx_GpWxQHucRV6cQo_l3KJsWYXafotTW7lFFBroZZSqZxn42QoTyJgUuAzFdwXfeOPbwuXa1pB-uvmu0w">
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">The Bombay Canteen Dinner</h4>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Oct 21, 9:30 PM</span>
+<span class="">•</span>
+<span class="text-secondary font-medium">HDFC NetBanking</span>
+</div>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">-₹1,850</span>
+</div>
+<!-- Tx 3: Subko Coffee -->
+<div class="flex items-center justify-between py-space-xs active:bg-surface-container-low rounded px-2 transition-colors">
+<div class="flex items-center gap-space-sm">
+<img class="w-11 h-11 rounded-full object-cover shrink-0" data-alt="Artisanal baked almond croissant and iced cold brew specialty coffee beverage on stone cafe table in sunlit morning" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYYU8IUTdudAAIRCYGW7IWqltepFpvY_fwg7QDhROAnOQW_XuyL5x122_eRWi1aEwFUvuzsEivaKYbm24eAyNe8twZs9cUNbj-56ziBVMOex8V7mrwrGlnUfepi8cT_V5QX0sGPtGIE4a0ezhKJZ2RBnPZZv8gCL1hdBSyF7m9jbeBSht50I1iTWkVVMjgcRt7v4dFhNqtAaLjqXlIcOHDo7zLeC1Ae4xbivwsz5DryEb5BTSX6JFEmg">
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Subko Specialty Coffee</h4>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Oct 19, 4:15 PM</span>
+<span class="">•</span>
+<span class="text-secondary font-medium">UPI • Google Pay</span>
+</div>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">-₹420</span>
+</div>
+<!-- Tx 4: Swiggy Gourmet -->
+<div class="flex items-center justify-between py-space-xs active:bg-surface-container-low rounded px-2 transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-11 h-11 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shrink-0">
+<span class="material-symbols-outlined text-[22px]">delivery_dining</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Swiggy Gourmet</h4>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Oct 16, 8:40 PM</span>
+<span class="">•</span>
+<span class="text-secondary font-medium">Millennia Card</span>
+</div>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">-₹860</span>
+</div>
+</div>
+</section>
+<!-- Interactive Spending Guard Tip Drawer / Insight -->
+<section class="bg-surface-container rounded-lg p-space-md flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+</div>
+<div class="space-y-0.5 flex-1">
+<h4 class="font-label-lg text-label-lg text-on-surface font-bold">Pacing Suggestion</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        You are trending ₹450 above budget. Skipping 2 cafe takeouts this week will bring you back into the green before month end.
+      </p>
+</div>
+</section>
+</div></main>
+
+</body></html>

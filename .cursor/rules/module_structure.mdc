@@ -1,0 +1,65 @@
+---
+description: Module Folder Structure
+alwaysApply: true
+---
+
+Every domain module must follow a consistent internal structure.
+
+Example:
+
+```text
+modules/
+└── transactions/
+    ├── domain/
+    │   ├── entities/
+    │   │   └── transaction.ts
+    │   ├── value-objects/
+    │   │   ├── transaction-type.ts
+    │   │   └── transaction-status.ts
+    │   ├── repositories/
+    │   │   └── transaction-repository.ts
+    │   ├── services/
+    │   │   └── transaction-domain-service.ts
+    │   ├── events/
+    │   │   └── transaction-events.ts
+    │   └── errors/
+    │       └── transaction-errors.ts
+    │
+    ├── application/
+    │   ├── commands/
+    │   │   ├── create-expense.ts
+    │   │   ├── create-income.ts
+    │   │   ├── update-transaction.ts
+    │   │   └── delete-transaction.ts
+    │   ├── queries/
+    │   │   ├── get-transaction.ts
+    │   │   └── list-transactions.ts
+    │   ├── dto/
+    │   └── mappers/
+    │
+    ├── infrastructure/
+    │   ├── persistence/
+    │   │   ├── transaction-repository.impl.ts
+    │   │   └── transaction-mapper.ts
+    │   └── api/
+    │
+    ├── presentation/
+    │   ├── screens/
+    │   ├── components/
+    │   ├── hooks/
+    │   └── view-models/
+    │
+    └── index.ts
+
+
+### Module Rules
+
+* `domain/` must be framework-independent.
+* `application/` coordinates use cases.
+* `infrastructure/` implements external dependencies.
+* `presentation/` consumes application services.
+* `index.ts` exposes only the module's public API.
+* Internal files must not be imported directly by unrelated modules.
+* Do not create a universal `services/` folder containing unrelated business logic.
+* Do not create a universal `utils/` folder for domain logic.
+* Do not create a universal `models/` folder containing every entity in the application.

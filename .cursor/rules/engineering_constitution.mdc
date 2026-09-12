@@ -1,0 +1,1866 @@
+---
+description: DailyMate Engineering Constitution
+alwaysApply: false
+---
+# DailyMate Engineering Constitution
+
+## 1. Purpose
+
+Build DailyMate as a production-quality, modular personal finance application.
+
+DailyMate helps users manage:
+
+* Authentication
+* Categories
+* Labels
+* Accounts
+* Budgets
+* Goals
+* Transactions
+* Planned Payments
+* Payees
+* User Preferences
+* Reminders
+* AI Controls
+
+The application must be designed as a **modular, domain-driven system** in which each entity acts as an independent business domain with clear responsibilities, controlled interfaces, and explicit relationships.
+
+The objective is not merely to make the UI functional. The objective is to create a codebase that remains understandable, testable, secure, and extensible as features grow.
+
+---
+
+# 2. Non-Negotiable Architecture Principles
+
+### Rule 1: Domain Ownership
+
+Every entity must own its:
+
+* Data model
+* Validation rules
+* Business logic
+* Use cases
+* Repository contract
+* Domain-specific errors
+* Tests
+
+No entity may depend directly on another entity's internal implementation.
+
+### Rule 2: UI Is Not Business Logic
+
+UI components must never contain:
+
+* Database queries
+* Financial calculations
+* Authentication logic
+* Budget calculation rules
+* Transaction posting logic
+* Debt or balance mutation logic
+* Reminder scheduling logic
+* AI business decisions
+
+UI components should only handle:
+
+* Rendering
+* User interaction
+* Local presentation state
+* Form state
+* Calling application use cases
+* Displaying loading, success, and error states
+
+### Rule 3: Use Cases Are the Application Entry Point
+
+All meaningful business actions must pass through application use cases.
+
+Examples:
+
+```text
+CreateExpense
+CreateIncome
+TransferMoney
+CreateBudget
+RecordGoalContribution
+CreatePlannedPayment
+MarkPlannedPaymentAsPaid
+CreateReminder
+UpdateUserPreferences
+```
+
+Do not allow screens to directly manipulate domain entities or database records.
+
+### Rule 4: Dependency Direction
+
+Dependencies must point inward toward stable business rules.
+
+```text
+Presentation
+    ↓
+Application / Use Cases
+    ↓
+Domain
+    ↑
+Infrastructure
+```
+
+Infrastructure implements interfaces defined by the domain or application layers.
+
+The domain must not depend on:
+
+* React
+* React Native
+* Expo
+* Flutter widgets
+* SQL drivers
+* ORM implementations
+* HTTP clients
+* Firebase SDK
+* Supabase SDK
+* AI SDKs
+* Platform notification APIs
+
+### Rule 5: No Circular Dependencies
+
+The following is prohibited:
+
+```text
+Transactions → Budgets → Accounts → Transactions
+```
+
+Instead, use:
+
+* Explicit application orchestration
+* Domain events
+* Repository interfaces
+* Read models
+* Query services
+
+### Rule 6: Financial Data Must Be Accurate
+
+Never use floating-point numbers for monetary calculations.
+
+Use:
+
+* Integer minor units, such as paise, wherever possible, or
+* A precise decimal representation
+
+Example:
+
+```ts
+type Money = {
+  amountMinor: bigint | number;
+  currency: string;
+};
+```
+
+If using JavaScript / TypeScript, define one consistent money strategy and use it everywhere.
+
+Never mix:
+
+```ts
+number // for some money fields
+string // for others
+```
+
+without an explicit conversion boundary.
+
+### Rule 7: No Silent Financial Mutation
+
+Any operation that changes financial state must be:
+
+* Explicit
+* Validated
+* Traceable
+* Transactional where required
+* Idempotent where retryable
+
+Examples:
+
+* Creating an expense
+* Editing an expense amount
+* Deleting a transaction
+* Transferring money
+* Marking a planned payment as paid
+* Recording a goal contribution
+* Updating an account balance
+
+---
+
+# 3. Recommended Project Structure
+
+Use a **feature-first modular architecture with clean domain boundaries**.
+
+The exact framework may vary, but the structure must preserve these boundaries.
+
+## Recommended Structure
+
+```text
+src/
+│
+├── app/
+│   ├── navigation/
+│   ├── providers/
+│   ├── routes/
+│   ├── bootstrap/
+│   └── app.config.ts
+│
+├── core/
+│   ├── domain/
+│   │   ├── entity.ts
+│   │   ├── aggregate.ts
+│   │   ├── value-objects/
+│   │   │   ├── money.ts
+│   │   │   ├── currency.ts
+│   │   │   ├── date-range.ts
+│   │   │   └── identifier.ts
+│   │   ├── errors/
+│   │   └── events/
+│   │
+│   ├── application/
+│   │   ├── result.ts
+│   │   ├── errors/
+│   │   └── ports/
+│   │
+│   ├── infrastructure/
+│   │   ├── database/
+│   │   ├── http/
+│   │   ├── storage/
+│   │   ├── notifications/
+│   │   └── ai/
+│   │
+│   ├── config/
+│   ├── logging/
+│   ├── security/
+│   └── utils/
+│
+├── modules/
+│   │
+│   ├── authentication/
+│   ├── categories/
+│   ├── labels/
+│   ├── accounts/
+│   ├── budgets/
+│   ├── goals/
+│   ├── transactions/
+│   ├── planned-payments/
+│   ├── payees/
+│   ├── user-preferences/
+│   ├── reminders/
+│   └── ai-control/
+│
+├── shared/
+│   ├── components/
+│   ├── hooks/
+│   ├── design-system/
+│   ├── formatters/
+│   └── constants/
+│
+└── tests/
+    ├── integration/
+    ├── contract/
+    └── e2e/
+```
+
+---
+
+# 4. Standard Module Structure
+
+Every domain module must follow a consistent internal structure.
+
+Example:
+
+```text
+modules/
+└── transactions/
+    ├── domain/
+    │   ├── entities/
+    │   │   └── transaction.ts
+    │   ├── value-objects/
+    │   │   ├── transaction-type.ts
+    │   │   └── transaction-status.ts
+    │   ├── repositories/
+    │   │   └── transaction-repository.ts
+    │   ├── services/
+    │   │   └── transaction-domain-service.ts
+    │   ├── events/
+    │   │   └── transaction-events.ts
+    │   └── errors/
+    │       └── transaction-errors.ts
+    │
+    ├── application/
+    │   ├── commands/
+    │   │   ├── create-expense.ts
+    │   │   ├── create-income.ts
+    │   │   ├── update-transaction.ts
+    │   │   └── delete-transaction.ts
+    │   ├── queries/
+    │   │   ├── get-transaction.ts
+    │   │   └── list-transactions.ts
+    │   ├── dto/
+    │   └── mappers/
+    │
+    ├── infrastructure/
+    │   ├── persistence/
+    │   │   ├── transaction-repository.impl.ts
+    │   │   └── transaction-mapper.ts
+    │   └── api/
+    │
+    ├── presentation/
+    │   ├── screens/
+    │   ├── components/
+    │   ├── hooks/
+    │   └── view-models/
+    │
+    └── index.ts
+```
+
+### Module Rules
+
+* `domain/` must be framework-independent.
+* `application/` coordinates use cases.
+* `infrastructure/` implements external dependencies.
+* `presentation/` consumes application services.
+* `index.ts` exposes only the module's public API.
+* Internal files must not be imported directly by unrelated modules.
+* Do not create a universal `services/` folder containing unrelated business logic.
+* Do not create a universal `utils/` folder for domain logic.
+* Do not create a universal `models/` folder containing every entity in the application.
+
+---
+
+# 5. Entity vs Aggregate vs Module
+
+Do not treat every database table as an independent business entity.
+
+Use these distinctions:
+
+### Entity
+
+An object with a stable identity and lifecycle.
+
+Examples:
+
+* Account
+* Budget
+* Goal
+* Payee
+* Reminder
+
+### Value Object
+
+An immutable object defined by its value.
+
+Examples:
+
+* Money
+* Currency
+* DateRange
+* RecurrenceRule
+* TransactionType
+
+### Aggregate
+
+A consistency boundary that controls changes to related data.
+
+For example:
+
+```text
+Transaction Aggregate
+    ├── Transaction
+    ├── Transaction Splits
+    └── Transaction Metadata
+```
+
+An aggregate must protect its invariants.
+
+### Module
+
+A business capability that owns related entities, use cases, and rules.
+
+Example:
+
+```text
+Transactions Module
+    ├── Expense
+    ├── Income
+    ├── Transfer
+    ├── Refund
+    └── Transaction History
+```
+
+Do not force every small concept to become a separate module if it creates unnecessary complexity.
+
+---
+
+# 6. Entity Ownership & Responsibility Matrix
+
+| Module           | Owns                                                               | Must Not Own                  |
+| ---------------- | ------------------------------------------------------------------ | ----------------------------- |
+| Authentication   | Identity, sessions, access, account security                       | Transaction data              |
+| Categories       | Category definitions, hierarchy, category rules                    | Actual transaction amounts    |
+| Labels           | User-defined classification labels                                 | Budget calculations           |
+| Accounts         | Account identity, account type, account lifecycle                  | UI dashboard summaries        |
+| Budgets          | Budget definitions, limits, periods, budget rules                  | Raw account persistence       |
+| Goals            | Targets, contribution rules, progress rules                        | General transaction storage   |
+| Transactions     | Financial events, transaction lifecycle, classification references | Notification delivery         |
+| Planned Payments | Future payment definitions, recurrence, payment lifecycle          | Direct UI reminders           |
+| Payees           | People / organizations and their identity                          | Global debt calculations      |
+| User Preferences | User-specific display and behavior settings                        | Financial business records    |
+| Reminders        | Reminder definitions, schedules, status                            | Core transaction mutation     |
+| AI Control       | AI permissions, capabilities, approval policies, audit rules       | Unrestricted financial writes |
+
+---
+
+# 7. Authentication Module
+
+## Responsibility
+
+Manage identity and access to the application.
+
+## Owns
+
+* User identity
+* Sign-up
+* Sign-in
+* Sign-out
+* Session management
+* Password / credential flows
+* Account recovery
+* Email / phone verification
+* Device sessions
+* Authentication state
+* Authorization context
+
+## Does Not Own
+
+* Budgets
+* Transactions
+* Account balances
+* User financial calculations
+
+## Rules
+
+1. Never store raw passwords in application databases.
+2. Never expose authentication tokens to UI components unnecessarily.
+3. Keep authentication provider-specific logic inside infrastructure.
+4. Use an abstraction for authentication providers.
+5. Every financial record must be scoped to an authenticated user.
+6. Never trust a user ID supplied directly by the client.
+7. Resolve the authenticated user from the verified session.
+8. Support session expiration and token refresh.
+9. Sensitive authentication operations must be audited.
+10. Authentication failure messages must not leak unnecessary information.
+
+## Example Interfaces
+
+```ts
+interface AuthService {
+  signIn(input: SignInInput): Promise<AuthSession>;
+  signUp(input: SignUpInput): Promise<AuthSession>;
+  signOut(): Promise<void>;
+  getCurrentSession(): Promise<AuthSession | null>;
+  refreshSession(): Promise<AuthSession>;
+}
+```
+
+---
+
+# 8. Categories Module
+
+## Responsibility
+
+Manage the classification structure used for financial transactions.
+
+## Owns
+
+* System categories
+* User-created categories
+* Category hierarchy
+* Category icons
+* Category colors
+* Category type
+* Category archive state
+* Category ordering
+
+## Category Types
+
+```ts
+type CategoryType =
+  | "expense"
+  | "income"
+  | "transfer"
+  | "other";
+```
+
+## Rules
+
+1. Categories must be scoped by user unless explicitly system-owned.
+2. System categories must not be silently modified by users.
+3. Archived categories must remain available for historical transactions.
+4. Deleting a category must not destroy historical transaction data.
+5. Category names must be validated for duplicates within the relevant scope.
+6. Category hierarchy must not allow circular parent relationships.
+7. Categories must not contain transaction calculation logic.
+8. Categories should be referenced by ID, not duplicated as mutable text across records.
+
+## Example
+
+```text
+Categories
+    ├── Food & Dining
+    │   ├── Groceries
+    │   └── Restaurants
+    ├── Transport
+    ├── Housing
+    ├── Salary
+    └── Freelance Income
+```
+
+---
+
+# 9. Labels Module
+
+## Responsibility
+
+Provide flexible, user-defined classification across financial records.
+
+## Owns
+
+* Label creation
+* Label editing
+* Label colors
+* Label archive state
+* Label assignment rules
+* Label search
+
+## Rules
+
+1. Labels are not categories.
+2. A transaction may have multiple labels if the product supports it.
+3. Labels must not contain budget logic.
+4. Labels must not directly mutate account balances.
+5. Archived labels must remain visible on historical records.
+6. Labels should be reusable across income, expenses, transfers, and other supported records.
+7. Avoid hardcoding labels into transaction logic.
+
+## Example
+
+```text
+Transaction:
+    Category: Travel
+    Labels:
+        - Business
+        - Reimbursable
+        - Work Trip
+```
+
+---
+
+# 10. Accounts Module
+
+## Responsibility
+
+Represent the user's financial accounts and their lifecycle.
+
+## Account Types
+
+* Bank Account
+* Cash
+* Wallet
+* Credit Card
+* Savings Account
+* Investment Account
+* Other
+
+## Owns
+
+* Account identity
+* Account type
+* Currency
+* Opening balance
+* Account status
+* Account metadata
+* Account archive state
+
+## Rules
+
+1. Every account belongs to a user.
+2. Every account has a currency.
+3. Account balances must have one authoritative calculation strategy.
+4. Do not allow multiple unrelated services to mutate balances independently.
+5. Transfers must be represented explicitly.
+6. Credit accounts must support a clear balance convention.
+7. Archived accounts must preserve historical transactions.
+8. Account deletion must be restricted when financial history exists.
+9. Balance-affecting operations must be atomic.
+10. Account balance must never be updated by UI code.
+
+## Important Architectural Decision
+
+Choose one of the following and document it:
+
+### Option A: Derived Balance
+
+```text
+Balance = Opening Balance + Sum of Posted Account Movements
+```
+
+### Option B: Materialized Balance
+
+```text
+Account Balance
+    + Transaction Ledger
+    + Reconciliation Rules
+```
+
+For a serious finance application, prefer a **transaction ledger with controlled balance projection** rather than arbitrary balance updates.
+
+---
+
+# 11. Budgets Module
+
+## Responsibility
+
+Manage spending limits and budget periods.
+
+## Owns
+
+* Budget definition
+* Budget amount
+* Budget period
+* Budget category / label scope
+* Budget alerts
+* Budget status
+* Budget calculation rules
+
+## Rules
+
+1. A budget must have a defined period.
+2. Budget amounts must use precise money handling.
+3. Budget calculations must be deterministic.
+4. Budget progress must be derived from eligible transactions or a controlled projection.
+5. A budget must define how refunds, transfers, and deleted transactions affect totals.
+6. Budget calculations must respect user timezone and period boundaries.
+7. Budget logic must not directly modify transactions.
+8. Budget alerts must be triggered through events or application services.
+9. Historical budget periods must remain reproducible.
+10. Editing a budget must not rewrite historical transactions.
+
+## Example
+
+```text
+Budget:
+    Name: Food & Dining
+    Period: September 2026
+    Limit: ₹10,000
+    Scope: Food & Dining category
+
+Calculation:
+    Eligible posted expenses
+    - Eligible refunds
+    = Budget consumption
+```
+
+---
+
+# 12. Goals Module
+
+## Responsibility
+
+Manage financial targets and progress toward them.
+
+## Owns
+
+* Goal identity
+* Goal type
+* Target amount
+* Current progress strategy
+* Target date
+* Contribution rules
+* Goal status
+* Goal priority
+
+## Rules
+
+1. A goal must have a target amount.
+2. A goal must define its progress model.
+3. Do not confuse goal progress with account balance.
+4. A goal may be linked to an account, but the relationship must be explicit.
+5. Contributions must be traceable.
+6. Goal progress must not be updated through arbitrary UI state.
+7. Goal completion must be derived or explicitly recorded according to the selected model.
+8. Deleting a goal must not delete contribution transactions.
+9. Goal calculations must handle withdrawals and reversals.
+10. Goal projections must not be presented as guaranteed outcomes.
+
+## Supported Progress Models
+
+```text
+1. Linked Account Balance
+2. Explicit Contributions
+3. Manual Progress
+```
+
+Choose one as the default and document the behavior.
+
+---
+
+# 13. Transactions Module
+
+## Responsibility
+
+Act as the central financial event system.
+
+This is the most critical module in DailyMate.
+
+## Transaction Types
+
+```ts
+type TransactionType =
+  | "expense"
+  | "income"
+  | "transfer"
+  | "refund"
+  | "adjustment";
+```
+
+Additional lending and debt events should be modeled carefully rather than forcing every financial concept into a generic expense.
+
+## Owns
+
+* Transaction identity
+* Transaction type
+* Amount
+* Currency
+* Date
+* Account references
+* Category reference
+* Label references
+* Payee reference
+* Notes
+* Attachments
+* Status
+* Transaction lifecycle
+* Financial event history
+
+## Rules
+
+1. Transactions must be user-scoped.
+2. Transactions must use precise monetary values.
+3. Transactions must have explicit types.
+4. Transactions must reference accounts by ID.
+5. Transactions must not duplicate account balances as an uncontrolled source of truth.
+6. Transactions must not directly send push notifications.
+7. Transactions must not directly call AI services.
+8. Transactions must validate account and category references.
+9. Transaction creation must be atomic with all required financial effects.
+10. Transaction updates must define whether they are mutable, reversible, or correction-based.
+11. Hard deletion of posted financial records should be restricted.
+12. Prefer reversal / correction records for important financial history.
+13. Every transaction mutation must be auditable.
+14. Duplicate submissions must be safely handled.
+15. Transaction dates and posting dates must be distinguished if required.
+16. Transfers must not be treated as income or expenses.
+17. Refunds must have explicit treatment in reporting and budgets.
+18. Historical transaction data must remain interpretable after category or label changes.
+
+## Recommended Transaction Model
+
+```text
+Transaction
+    ├── id
+    ├── userId
+    ├── type
+    ├── amount
+    ├── currency
+    ├── occurredAt
+    ├── postedAt
+    ├── status
+    ├── accountId
+    ├── categoryId
+    ├── payeeId
+    ├── notes
+    └── metadata
+```
+
+For transfers:
+
+```text
+Transfer
+    ├── sourceAccountId
+    ├── destinationAccountId
+    ├── amount
+    └── linkedTransactionIds
+```
+
+Do not model a transfer as an ordinary expense.
+
+---
+
+# 14. Planned Payments Module
+
+## Responsibility
+
+Manage future, scheduled, and recurring financial obligations.
+
+## Owns
+
+* Planned payment definition
+* Recurrence rule
+* Due dates
+* Payment amount
+* Payee
+* Linked account
+* Payment lifecycle
+* Occurrence history
+
+## Statuses
+
+```ts
+type PlannedPaymentStatus =
+  | "active"
+  | "paused"
+  | "completed"
+  | "cancelled";
+```
+
+Occurrence statuses:
+
+```ts
+type PaymentOccurrenceStatus =
+  | "upcoming"
+  | "due"
+  | "overdue"
+  | "paid"
+  | "skipped"
+  | "cancelled";
+```
+
+## Rules
+
+1. Planned payments are not transactions until they are recorded as actual financial events.
+2. Recurrence rules must be explicit and timezone-aware.
+3. Each occurrence must have a stable identity.
+4. Marking a payment as paid must be idempotent.
+5. A planned payment must not silently mutate account balances before payment is recorded.
+6. The system must distinguish planned amount from actual paid amount.
+7. Skipped occurrences must remain traceable.
+8. Editing recurrence must define its effect on future occurrences only.
+9. Past payment history must not be rewritten accidentally.
+10. Planned payments may emit reminder events but must not own notification delivery infrastructure.
+
+## Example Flow
+
+```text
+Planned Payment
+    ↓
+Upcoming Occurrence
+    ↓
+Reminder
+    ↓
+User Marks as Paid
+    ↓
+Create Actual Transaction
+    ↓
+Update Financial Projections
+```
+
+---
+
+# 15. Payees Module
+
+## Responsibility
+
+Manage people and organizations associated with financial activity.
+
+## Owns
+
+* Person / organization identity
+* Display name
+* Contact metadata
+* Payee type
+* Archive state
+* Search and merge rules
+
+## Rules
+
+1. Payees must be user-scoped.
+2. Payees must not own transaction amounts.
+3. Payees must not directly mutate account balances.
+4. A payee may be linked to many transactions.
+5. Payee deletion must preserve historical transaction references.
+6. Duplicate payees should be mergeable through a controlled operation.
+7. Borrower / lender behavior should be modeled explicitly if supported.
+8. Do not overload the payee entity with debt accounting logic.
+
+## Important Distinction
+
+A **Payee** is a party associated with a transaction.
+
+A **Borrower / Lender / Debt Participant** may require additional domain concepts.
+
+Do not assume:
+
+```text
+Payee = Debt Account
+```
+
+They are related but not identical.
+
+---
+
+# 16. User Preferences Module
+
+## Responsibility
+
+Manage user-specific application configuration and personalization.
+
+## Owns
+
+* Preferred currency
+* Locale
+* Timezone
+* Date format
+* Number format
+* Theme
+* Start screen
+* Notification preferences
+* Dashboard preferences
+* Privacy preferences
+* AI preferences
+* Default account
+* Default category
+* Default reminder behavior
+
+## Rules
+
+1. Preferences must not contain core financial data.
+2. Preferences must be validated against supported values.
+3. Preferences must have safe defaults.
+4. Preferences must be user-scoped.
+5. Changing display preferences must not alter historical financial records.
+6. Sensitive preferences must be handled securely.
+7. Preferences must not be scattered across arbitrary local storage keys.
+8. Use a versioned preference schema where migrations may be required.
+9. Keep device-specific settings separate from account-wide settings.
+10. Preference updates should be independently testable.
+
+---
+
+# 17. Reminders Module
+
+## Responsibility
+
+Manage reminders and their lifecycle.
+
+## Owns
+
+* Reminder identity
+* Reminder type
+* Trigger time
+* Recurrence
+* Linked entity reference
+* Reminder status
+* Delivery preferences
+* Completion / dismissal state
+
+## Reminder Types
+
+* Planned Payment Reminder
+* Budget Alert
+* Goal Contribution Reminder
+* Debt Reminder
+* Warranty Reminder
+* Custom Reminder
+
+## Rules
+
+1. Reminders must reference entities through stable IDs.
+2. Reminders must not duplicate business data unnecessarily.
+3. Reminder scheduling must be timezone-aware.
+4. Reminder delivery must be separated from reminder definition.
+5. A reminder must be idempotent.
+6. Dismissing a reminder must not delete the underlying financial entity.
+7. Reminder failures must be observable.
+8. Expired reminders must have a defined retention policy.
+9. Notification providers must be abstracted behind infrastructure interfaces.
+10. A reminder must never silently create a financial transaction unless explicitly configured through an approved workflow.
+
+## Architecture
+
+```text
+Reminder Domain
+    ↓
+Reminder Scheduler Interface
+    ↓
+Platform Notification Adapter
+```
+
+---
+
+# 18. AI Control Module
+
+## Responsibility
+
+Provide a controlled governance layer for AI-powered features.
+
+This module must not become an unrestricted AI agent with direct access to the entire database.
+
+## Potential AI Features
+
+* Categorize transactions
+* Suggest labels
+* Detect recurring expenses
+* Summarize spending
+* Explain budget changes
+* Identify unusual spending
+* Suggest budget adjustments
+* Search financial history
+* Answer questions about user finances
+* Draft planned payments
+* Suggest goal contributions
+
+## Non-Negotiable AI Rules
+
+### Rule 1: AI Is Not the Source of Truth
+
+AI must never be the authoritative source for:
+
+* Account balances
+* Transaction amounts
+* Debt balances
+* Budget calculations
+* Goal balances
+* Payment status
+
+AI may interpret trusted application data, but it must not replace deterministic calculations.
+
+### Rule 2: AI Has Explicit Permissions
+
+Define capabilities such as:
+
+```ts
+type AiCapability =
+  | "read_transactions"
+  | "read_accounts"
+  | "read_budgets"
+  | "read_goals"
+  | "suggest_categories"
+  | "suggest_labels"
+  | "create_draft_transaction"
+  | "create_draft_budget"
+  | "create_draft_reminder";
+```
+
+Avoid granting unrestricted write access.
+
+### Rule 3: Read and Write Must Be Separate
+
+AI should preferably:
+
+```text
+User Question
+    ↓
+AI Interpretation
+    ↓
+Structured Query / Tool Call
+    ↓
+Application Query
+    ↓
+Trusted Result
+    ↓
+AI Explanation
+```
+
+For writes:
+
+```text
+AI Suggestion
+    ↓
+Structured Draft
+    ↓
+Validation
+    ↓
+User Confirmation
+    ↓
+Application Use Case
+    ↓
+Domain Mutation
+```
+
+### Rule 4: No Direct Database Access
+
+AI must never execute arbitrary SQL or directly mutate repositories.
+
+### Rule 5: No Hidden Actions
+
+AI must not:
+
+* Delete transactions
+* Transfer money
+* Mark payments as paid
+* Change budgets
+* Modify account balances
+* Send financial notifications
+
+without explicit application-level authorization and, where appropriate, user confirmation.
+
+### Rule 6: AI Auditability
+
+Record:
+
+* AI feature used
+* User request
+* Tool invoked
+* Data scope
+* Suggested action
+* Approval state
+* Final application action
+* Error state
+
+Do not store sensitive prompts or financial data unnecessarily.
+
+### Rule 7: AI Output Is Untrusted
+
+Validate all AI-generated structured output using schemas.
+
+Example:
+
+```ts
+const SuggestedCategorySchema = z.object({
+  categoryId: z.string(),
+  confidence: z.number().min(0).max(1),
+  reason: z.string().optional(),
+});
+```
+
+---
+
+# 19. Inter-Module Communication Rules
+
+Modules must communicate through explicit contracts.
+
+## Allowed Communication
+
+```text
+Transactions → Accounts
+Transactions → Categories
+Transactions → Labels
+Transactions → Payees
+Transactions → Budgets
+Transactions → Goals
+Planned Payments → Payees
+Planned Payments → Accounts
+Planned Payments → Reminders
+Reminders → Planned Payments
+AI Control → Application Queries
+AI Control → Application Commands through approval
+```
+
+However, these relationships must not become direct internal imports everywhere.
+
+## Preferred Pattern
+
+```text
+Application Orchestrator
+    ├── Transaction Service
+    ├── Account Service
+    ├── Budget Service
+    └── Reminder Service
+```
+
+Or use domain events:
+
+```text
+TransactionCreated
+    ├── Update Budget Projection
+    ├── Update Goal Projection
+    ├── Update Reports
+    └── Evaluate Reminder Conditions
+```
+
+### Important Rule
+
+Do not make every module subscribe to every event.
+
+Events must have:
+
+* A clear purpose
+* A defined owner
+* A stable payload
+* Idempotent consumers
+* Error handling
+* Retry behavior where required
+
+---
+
+# 20. Domain Events
+
+Use domain events for meaningful business changes.
+
+## Examples
+
+```ts
+TransactionCreated
+TransactionUpdated
+TransactionReversed
+AccountCreated
+AccountArchived
+BudgetExceeded
+GoalContributionRecorded
+PlannedPaymentDue
+PlannedPaymentMarkedPaid
+ReminderTriggered
+PayeeMerged
+```
+
+## Event Rules
+
+1. Events describe something that happened.
+2. Events must not contain unnecessary sensitive data.
+3. Events must have stable schemas.
+4. Event consumers must be idempotent.
+5. Events must not be used to hide required synchronous validation.
+6. Financial consistency must not depend on unreliable client-side event delivery.
+7. Use an outbox pattern if reliable event publication is required.
+
+---
+
+# 21. Database & Persistence Rules
+
+## General Rules
+
+1. Database schema must reflect domain ownership.
+2. Every user-owned record must have a user scope.
+3. Foreign keys must be used where appropriate.
+4. Indexes must support common access patterns.
+5. Timestamps must be stored consistently.
+6. Monetary values must use precise types.
+7. Soft deletion / archival must be defined explicitly.
+8. Database migrations must be version-controlled.
+9. Never modify production schema manually without a migration.
+10. Never expose database models directly to the UI.
+
+## Recommended Persistence Separation
+
+```text
+Domain Entity
+    ↕
+Mapper
+    ↕
+Persistence Model
+    ↕
+Database
+```
+
+Do not make ORM models your domain models by default.
+
+---
+
+# 22. API / Repository Rules
+
+Every module must define repository contracts where persistence is needed.
+
+Example:
+
+```ts
+interface TransactionRepository {
+  getById(
+    userId: UserId,
+    transactionId: TransactionId
+  ): Promise<Transaction | null>;
+
+  list(
+    userId: UserId,
+    filter: TransactionFilter
+  ): Promise<PaginatedResult<Transaction>>;
+
+  save(transaction: Transaction): Promise<void>;
+
+  reverse(
+    userId: UserId,
+    transactionId: TransactionId
+  ): Promise<void>;
+}
+```
+
+## Rules
+
+* Repository methods must enforce user scope.
+* Repositories must not contain UI-specific logic.
+* Repositories must not silently perform unrelated domain operations.
+* Queries must return domain objects or dedicated read models.
+* Pagination must be explicit.
+* Filtering must be validated.
+* Sorting must be controlled.
+* Never construct SQL from untrusted input.
+* Never return unrestricted database rows to the frontend.
+
+---
+
+# 23. DTO Rules
+
+Do not expose domain entities directly through APIs.
+
+Use DTOs.
+
+```text
+Domain Entity
+    ↓
+Mapper
+    ↓
+Response DTO
+    ↓
+Presentation
+```
+
+DTOs should:
+
+* Contain only required fields
+* Use stable API naming
+* Avoid leaking internal fields
+* Avoid exposing security-sensitive data
+* Be versionable
+* Be validated at boundaries
+
+---
+
+# 24. Validation Rules
+
+Validation must happen at multiple boundaries.
+
+### UI Validation
+
+For immediate user feedback.
+
+### Application Validation
+
+For use-case input correctness.
+
+### Domain Validation
+
+For business invariants.
+
+### Database Validation
+
+For persistence integrity.
+
+Never rely only on frontend validation.
+
+Example:
+
+```text
+UI:
+    Amount is required
+
+Application:
+    Amount must be positive
+
+Domain:
+    Transaction must have a valid account
+
+Database:
+    Foreign key must exist
+```
+
+---
+
+# 25. Error Handling Rules
+
+Use typed, predictable errors.
+
+Example:
+
+```ts
+class DomainError extends Error {}
+
+class ValidationError extends DomainError {}
+
+class NotFoundError extends DomainError {}
+
+class UnauthorizedError extends DomainError {}
+
+class ConflictError extends DomainError {}
+
+class FinancialOperationError extends DomainError {}
+```
+
+## Rules
+
+1. Do not throw generic strings.
+2. Do not expose stack traces to users.
+3. Do not silently swallow errors.
+4. Errors must be logged with context.
+5. User-facing messages must be understandable.
+6. Sensitive data must not appear in logs.
+7. Network errors and domain errors must be distinguishable.
+8. Retry only operations that are safe to retry.
+
+---
+
+# 26. State Management Rules
+
+Separate state into categories.
+
+### Server / Persistent State
+
+* Transactions
+* Accounts
+* Budgets
+* Goals
+* Planned Payments
+* Payees
+* Reminders
+
+### UI State
+
+* Modal visibility
+* Selected tab
+* Form state
+* Search input
+* Temporary filters
+
+### Session State
+
+* Authenticated user
+* Session status
+* Permissions
+
+### Cached State
+
+* Read-only dashboard summaries
+* Recent transactions
+* Budget snapshots
+
+## Rules
+
+1. Do not duplicate the same source of truth in multiple stores.
+2. Do not store derived financial totals as arbitrary UI state.
+3. Invalidate or update caches after mutations.
+4. Handle loading, empty, error, and stale states.
+5. Avoid global state for feature-specific temporary state.
+
+---
+
+# 27. Financial Consistency Rules
+
+These rules are mandatory.
+
+## Transaction Creation
+
+A transaction must not be considered successfully created until all required persistence operations succeed.
+
+## Transfer
+
+A transfer must preserve accounting consistency:
+
+```text
+Source Account: -Amount
+Destination Account: +Amount
+```
+
+Both sides must be linked.
+
+## Refund
+
+Refund behavior must be explicit:
+
+* Linked to original transaction where applicable
+* Included correctly in reporting
+* Reflected in budget calculations
+* Reflected in account movements
+
+## Edit Transaction
+
+Define whether editing means:
+
+1. Mutating the original record, or
+2. Reversing the original and creating a corrected record
+
+For posted financial history, prefer an auditable correction strategy.
+
+## Delete Transaction
+
+Avoid unrestricted hard deletion.
+
+Use:
+
+* Reversal
+* Void
+* Archive
+* Correction
+
+according to transaction state.
+
+---
+
+# 28. Security Rules
+
+1. Enforce authorization on the server or trusted backend.
+2. Never rely on UI visibility for access control.
+3. Every query must be scoped to the authenticated user.
+4. Validate ownership of related entities.
+5. Encrypt sensitive data where appropriate.
+6. Do not log full financial records unnecessarily.
+7. Do not expose account secrets or credentials.
+8. Use secure token storage.
+9. Protect AI access to financial data.
+10. Apply rate limits to authentication and AI endpoints.
+11. Use secure defaults.
+12. Keep dependencies updated.
+13. Never commit secrets to source control.
+14. Use environment variables for configuration.
+15. Separate development, staging, and production credentials.
+
+---
+
+# 29. Testing Strategy
+
+Every module must have tests at the correct level.
+
+## Unit Tests
+
+Test:
+
+* Domain rules
+* Value objects
+* Financial calculations
+* Validation
+* Recurrence logic
+* Budget calculations
+* Goal progress
+* Transaction invariants
+
+## Integration Tests
+
+Test:
+
+* Repository implementations
+* Database constraints
+* Use-case orchestration
+* Transaction + account consistency
+* Planned payment + reminder integration
+
+## Contract Tests
+
+Test:
+
+* API request / response schemas
+* Repository contracts
+* AI tool schemas
+* Event payloads
+
+## E2E Tests
+
+Test critical user journeys:
+
+1. Sign in
+2. Create account
+3. Add expense
+4. View transaction history
+5. Create budget
+6. Expense updates budget
+7. Create goal
+8. Record contribution
+9. Create planned payment
+10. Mark planned payment as paid
+11. Create reminder
+12. AI suggests a category
+13. User approves an AI-generated draft
+
+---
+
+# 30. Naming Conventions
+
+Use consistent naming throughout the codebase.
+
+### Files
+
+Prefer:
+
+```text
+create-expense.ts
+transaction-repository.ts
+budget-calculator.ts
+planned-payment-service.ts
+```
+
+Avoid:
+
+```text
+misc.ts
+helpers.ts
+common.ts
+stuff.ts
+manager.ts
+```
+
+unless the responsibility is genuinely clear.
+
+### Classes
+
+Use PascalCase:
+
+```ts
+TransactionRepository
+BudgetCalculator
+CreateExpenseUseCase
+```
+
+### Functions
+
+Use descriptive verbs:
+
+```ts
+createExpense()
+calculateBudgetUsage()
+recordGoalContribution()
+markPlannedPaymentAsPaid()
+```
+
+### Booleans
+
+Use clear prefixes:
+
+```ts
+isArchived
+isRecurring
+hasExceededBudget
+canCreateDraft
+```
+
+### IDs
+
+Use explicit names:
+
+```ts
+userId
+accountId
+transactionId
+budgetId
+goalId
+payeeId
+reminderId
+```
+
+Never use ambiguous variables such as:
+
+```ts
+id
+data
+item
+obj
+```
+
+for business-critical logic.
+
+---
+
+# 31. Code Quality Rules
+
+1. Prefer small, focused functions.
+2. Avoid deeply nested conditionals.
+3. Avoid massive components.
+4. Avoid massive service classes.
+5. Avoid generic “God objects.”
+6. Avoid premature abstraction.
+7. Avoid duplicated business rules.
+8. Avoid hidden side effects.
+9. Prefer explicit dependencies.
+10. Prefer immutable value objects.
+11. Use strict typing.
+12. Avoid `any` unless explicitly justified.
+13. Avoid unsafe type assertions.
+14. Avoid magic numbers.
+15. Use constants for domain values.
+16. Keep functions deterministic where possible.
+17. Keep business logic independently testable.
+18. Add comments explaining decisions, not obvious syntax.
+19. Use linting and formatting consistently.
+20. Do not suppress compiler or lint errors without justification.
+
+---
+
+# 32. Dependency Rules
+
+### Allowed
+
+```text
+Presentation → Application
+Application → Domain
+Infrastructure → Domain / Application Contracts
+```
+
+### Restricted
+
+```text
+Domain → Presentation
+Domain → React
+Domain → Database SDK
+Domain → AI SDK
+```
+
+### Prohibited
+
+```text
+UI → Direct Database Query
+UI → Direct Account Balance Mutation
+AI → Direct Database Mutation
+Category → Transaction Repository Implementation
+Budget → UI Component
+Reminder → Push Notification SDK directly
+```
+
+---
+
+# 33. Dashboard Architecture
+
+The Home Dashboard must not become the owner of every domain.
+
+The dashboard is a **read-oriented composition layer**.
+
+```text
+Dashboard Query
+    ├── Account Summary
+    ├── Transaction Summary
+    ├── Budget Summary
+    ├── Goal Summary
+    ├── Upcoming Payment Summary
+    ├── Reminder Summary
+    └── Outstanding Summary
+```
+
+Use dedicated query services or read models.
+
+Do not make the dashboard call dozens of repositories directly from a UI component.
+
+---
+
+# 34. Feature Implementation Workflow
+
+Every new feature must follow this sequence.
+
+### Step 1: Define the Domain
+
+Document:
+
+* Purpose
+* Ownership
+* Entities
+* Value objects
+* Invariants
+* Relationships
+* Events
+
+### Step 2: Define Contracts
+
+Create:
+
+* Repository interfaces
+* Use-case input / output types
+* DTOs
+* External service interfaces
+
+### Step 3: Implement Domain Logic
+
+Implement:
+
+* Entities
+* Value objects
+* Domain services
+* Validation
+* Domain errors
+
+### Step 4: Implement Application Use Cases
+
+Implement:
+
+* Commands
+* Queries
+* Orchestration
+* Authorization checks
+* Transaction boundaries
+
+### Step 5: Implement Infrastructure
+
+Implement:
+
+* Database models
+* Mappers
+* Repository implementations
+* API adapters
+* Notification adapters
+
+### Step 6: Implement Presentation
+
+Implement:
+
+* Screens
+* Components
+* Forms
+* Hooks
+* View models
+* Loading states
+* Error states
+* Empty states
+
+### Step 7: Add Tests
+
+Add unit, integration, and E2E tests appropriate to the feature.
+
+### Step 8: Review Interconnections
+
+Verify:
+
+* No circular dependencies
+* No duplicated business logic
+* No unauthorized data access
+* No hidden financial mutations
+* No direct UI-to-database access
+* No broken cache invalidation
+
+---
+
+# 35. Definition of Done
+
+A feature is not complete merely because the screen works.
+
+A feature is complete only when:
+
+* [ ] Domain responsibility is documented
+* [ ] Data model is defined
+* [ ] Business rules are implemented
+* [ ] Use cases exist
+* [ ] Repository contracts exist
+* [ ] Infrastructure is implemented
+* [ ] API boundaries are validated
+* [ ] UI is connected through use cases
+* [ ] Loading / empty / error states exist
+* [ ] Authorization is enforced
+* [ ] Financial mutations are safe
+* [ ] Related modules are correctly connected
+* [ ] Tests are written
+* [ ] Logging is appropriate
+* [ ] No circular dependencies exist
+* [ ] No business logic is hidden inside UI components
+* [ ] Documentation is updated
+
+---
+
+# 36. Final Instruction to the Coding Agent
+
+Before writing code:
+
+1. Inspect the existing project structure.
+2. Identify the current framework, database, state management, and navigation system.
+3. Do not replace the existing stack without explicit approval.
+4. Map existing code to the architecture described above.
+5. Identify violations and technical debt.
+6. Propose a migration plan before making large structural changes.
+7. Implement incrementally.
+8. Preserve working functionality.
+9. Do not create duplicate entities or competing sources of truth.
+10. Do not introduce abstractions that are not needed.
+11. Explain architectural decisions when they affect multiple modules.
+12. Keep every module independently understandable.
+13. Ensure all financial operations are deterministic, auditable, and testable.
+
+**The final codebase must behave as a modular financial platform, not as a collection of UI screens connected by ad hoc API calls.**

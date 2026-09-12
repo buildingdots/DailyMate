@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DailyMate Onboarding - Effortless Tracking</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#0F172A',
+              slate: '#1E293B',
+              teal: '#0D9488',
+              emerald: '#10B981',
+              mint: '#CCFBF1',
+              surface: '#F8FAFC',
+              border: '#E2E8F0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] min-h-screen flex flex-col justify-between overflow-x-hidden relative text-brand-navy selection:bg-brand-teal selection:text-white">
+<!-- Mobile Main Container -->
+<div class="w-full flex-1 flex flex-col justify-between relative">
+<!-- Top Status Bar & Navigation -->
+<div class="pt-12 px-6 pb-3 flex items-center justify-between z-20">
+<!-- Brand Minimal Logo Badge -->
+<div class="flex items-center space-x-2">
+<div class="w-9 h-9 rounded-2xl bg-brand-navy flex items-center justify-center shadow-md shadow-brand-navy/10">
+<svg fill="none" height="20" viewbox="0 0 100 100" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M75,20 A55,55 0 1,1 25,70" stroke="#FFFFFF" stroke-linecap="round" stroke-width="14"></path>
+<path d="M48,84 A34,34 0 0,1 106,58" stroke="#2DD4BF" stroke-linecap="round" stroke-width="13"></path>
+<circle cx="112" cy="30" fill="#10B981" r="14"></circle>
+</svg>
+</div>
+<span class="text-[17px] font-bold tracking-tight text-brand-navy">Daily<span class="text-brand-teal">Mate</span></span>
+</div>
+<!-- Skip Button -->
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-500 hover:text-brand-navy hover:bg-slate-200/60 transition-colors active:scale-95">
+        Skip
+      </button>
+</div>
+<!-- Center Hero Visual / Interactive Graphic -->
+<div class="px-5 flex-1 flex flex-col items-center justify-center relative my-3">
+<!-- Decorative Background Aura -->
+<div class="absolute w-72 h-72 bg-gradient-to-tr from-teal-200/40 via-emerald-100/30 to-blue-200/40 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+<!-- High-Fidelity App Card -->
+<div class="w-full max-w-[350px] bg-white rounded-3xl p-5 shadow-xl shadow-slate-200/60 border border-slate-100 relative">
+<!-- Live Quick Entry Simulation -->
+<div class="flex items-center justify-between pb-3 border-b border-slate-100">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center text-xs">
+<i class="fa-solid fa-bolt"></i>
+</div>
+<div>
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Quick Capture</p>
+<h4 class="text-sm font-bold text-brand-navy">Instant 3-Sec Logging</h4>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-50 text-[11px] font-bold text-emerald-600 border border-emerald-100">Auto-Categorized</span>
+</div>
+<!-- Simulated Expense Items -->
+<div class="mt-4 space-y-2.5">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100/80 transition-colors">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm shadow-sm">
+<i class="fa-solid fa-mug-saucer"></i>
+</div>
+<div>
+<p class="text-xs font-bold text-brand-navy">Blue Tokai Coffee</p>
+<p class="text-[11px] font-medium text-slate-400">Food &amp; Dining • HDFC</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-brand-navy">-₹320.00</p>
+<p class="text-[10px] text-emerald-600 font-semibold flex items-center justify-end gap-1"><i class="fa-solid fa-check text-[9px]"></i> Tagged</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-2xl bg-slate-50 hover:bg-slate-100/80 transition-colors">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm shadow-sm">
+<i class="fa-solid fa-car"></i>
+</div>
+<div>
+<p class="text-xs font-bold text-brand-navy">Uber Commute</p>
+<p class="text-[11px] font-medium text-slate-400">Travel • Credit Card</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-brand-navy">-₹280.00</p>
+<p class="text-[10px] text-emerald-600 font-semibold flex items-center justify-end gap-1"><i class="fa-solid fa-check text-[9px]"></i> Tagged</p>
+</div>
+</div>
+<!-- Item 3: Receipt Auto-attached Badge -->
+<div class="p-2.5 rounded-2xl bg-gradient-to-r from-teal-50/80 to-emerald-50/60 border border-teal-100/70 flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-lg bg-white text-brand-teal flex items-center justify-center shadow-xs text-xs">
+<i class="fa-solid fa-receipt"></i>
+</div>
+<div class="flex-1">
+<p class="text-[11px] font-bold text-brand-navy leading-tight">Smart Invoice OCR Scanner</p>
+<p class="text-[10px] text-slate-500 font-medium">Auto-reads total, tax &amp; merchant</p>
+</div>
+<span class="text-xs font-bold text-brand-teal"><i class="fa-solid fa-circle-check"></i></span>
+</div>
+</div>
+<!-- Mini Stat Pill -->
+<div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
+<span class="flex items-center gap-1.5"><i class="fa-solid fa-clock-rotate-left text-brand-teal text-[11px]"></i> Today's Spend</span>
+<span class="text-brand-navy font-bold">₹600.00 <span class="text-[10px] text-slate-400 font-normal">/ ₹1,200 cap</span></span>
+</div>
+</div>
+</div>
+<!-- Bottom Content Card & Action Area -->
+<div class="px-6 pt-5 pb-9 bg-white rounded-t-[36px] shadow-2xl border-t border-slate-100 z-10">
+<!-- Step Dots Indicator -->
+<div class="flex items-center justify-center space-x-2 mb-4">
+<div class="w-8 h-2 rounded-full bg-brand-navy transition-all duration-300"></div>
+<div class="w-2 h-2 rounded-full bg-slate-200"></div>
+<div class="w-2 h-2 rounded-full bg-slate-200"></div>
+</div>
+<!-- Headings & Copy -->
+<div class="text-center mb-6">
+<span class="inline-block px-3 py-1 rounded-full bg-teal-50 text-brand-teal text-xs font-bold tracking-wide uppercase mb-2.5">
+          Step 1 of 3 • Everyday Tracking
+        </span>
+<h2 class="text-2xl font-extrabold text-brand-navy tracking-tight leading-snug">
+          Track Every Rupee <br/><span class="text-brand-teal">Without the Friction</span>
+</h2>
+<p class="text-[13px] text-slate-500 mt-2 font-normal leading-relaxed max-w-[320px] mx-auto">
+          Log spends in under 3 seconds. Snap physical paper bills, link accounts effortlessly, and let smart categories handle the rest.
+        </p>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-3">
+<button class="w-full h-14 rounded-full bg-brand-navy text-white font-bold text-[15px] flex items-center justify-center space-x-2 shadow-lg shadow-brand-navy/20 hover:bg-slate-800 active:scale-[0.99] transition-all">
+<span>Continue</span>
+<i class="fa-solid fa-arrow-right text-xs"></i>
+</button>
+<p class="text-center text-[11px] text-slate-400 font-medium">
+          Already have a DailyMate account? <a class="text-brand-teal font-bold hover:underline" href="#">Log in</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
