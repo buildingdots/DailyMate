@@ -22,14 +22,14 @@ export class UsersController {
   @Get('me')
   @ApiOperation({ summary: 'Get current user profile' })
   @ApiOkResponse({ type: UserResponseDto })
-  getMe(@CurrentUser() user: RequestUser) {
+  getMe(@CurrentUser() user: RequestUser & object) {
     return this.usersService.getProfile(user.userId);
   }
 
   @Patch('me')
   @ApiOperation({ summary: 'Update current user profile' })
   @ApiOkResponse({ type: UserResponseDto })
-  updateMe(@CurrentUser() user: RequestUser, @Body() dto: UpdateProfileDto) {
+  updateMe(@CurrentUser() user: RequestUser & object, @Body() dto: UpdateProfileDto) {
     return this.usersService.updateProfile(user.userId, dto);
   }
 
@@ -41,7 +41,7 @@ export class UsersController {
   })
   @ApiOkResponse({ type: UserResponseDto })
   updateWealthTier(
-    @CurrentUser() user: RequestUser,
+    @CurrentUser() user: RequestUser & object,
     @Body() dto: UpdateWealthTierDto,
   ) {
     return this.usersService.updateWealthTier(user.userId, dto.wealthTier);

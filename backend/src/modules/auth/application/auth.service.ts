@@ -104,7 +104,7 @@ export class AuthService {
       AuthProviderType.Google,
       profile.sub,
       profile.email,
-      profile.name,
+      profile.name ?? '',
       profile.picture,
       dto.deviceId,
     );
@@ -238,10 +238,10 @@ export class AuthService {
     email: string,
     deviceId: string,
   ): Promise<AuthTokens> {
-    const accessToken = this.jwtService.sign(
-      { sub: userId, email },
-      { secret: this.accessSecret, expiresIn: this.accessExpiresIn },
-    );
+    const accessToken = this.jwtService.sign<{ sub: string; email: string }>(
+        { sub: userId, email },
+        { secret: this.accessSecret, expiresIn: this.parseDurationToMs(this.accessExpiresIn) as number },
+      ) as string;
 
     const refreshToken = randomBytes(48).toString('hex');
     const refreshExpiresMs = this.parseDurationToMs(this.refreshExpiresIn);

@@ -33,14 +33,14 @@ export class DevicesController {
   @Get()
   @ApiOperation({ summary: 'List registered devices for current user' })
   @ApiOkResponse({ type: DeviceResponseDto, isArray: true })
-  list(@CurrentUser() user: RequestUser) {
+  list(@CurrentUser() user: RequestUser & object) {
     return this.devicesService.listDevices(user.userId);
   }
 
   @Post()
   @ApiOperation({ summary: 'Register or update a device' })
   @ApiOkResponse({ type: DeviceResponseDto })
-  register(@CurrentUser() user: RequestUser, @Body() dto: RegisterDeviceDto) {
+  register(@CurrentUser() user: RequestUser & object, @Body() dto: RegisterDeviceDto) {
     return this.devicesService.registerDevice(user.userId, dto);
   }
 
@@ -49,7 +49,7 @@ export class DevicesController {
   @ApiParam({ name: 'deviceId', description: 'Client-generated device identifier' })
   @ApiOkResponse({ type: DeviceResponseDto })
   update(
-    @CurrentUser() user: RequestUser,
+    @CurrentUser() user: RequestUser & object,
     @Param('deviceId') deviceId: string,
     @Body() dto: UpdateDeviceDto,
   ) {
@@ -62,7 +62,7 @@ export class DevicesController {
   @ApiParam({ name: 'deviceId', description: 'Client-generated device identifier' })
   @ApiNoContentResponse()
   async remove(
-    @CurrentUser() user: RequestUser,
+    @CurrentUser() user: RequestUser & object,
     @Param('deviceId') deviceId: string,
   ) {
     await this.devicesService.removeDevice(user.userId, deviceId);

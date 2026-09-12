@@ -22,7 +22,7 @@ export class SubscriptionsController {
   @Get('me')
   @ApiOperation({ summary: 'Get current subscription status' })
   @ApiOkResponse({ type: SubscriptionResponseDto })
-  getMySubscription(@CurrentUser() user: RequestUser) {
+  getMySubscription(@CurrentUser() user: RequestUser & object) {
     return this.subscriptionsService.getForUser(user.userId);
   }
 
@@ -33,7 +33,7 @@ export class SubscriptionsController {
   })
   @ApiOkResponse({ type: CheckoutResponseDto })
   createCheckout(
-    @CurrentUser() user: RequestUser,
+    @CurrentUser() user: RequestUser & object,
     @Body() dto: CreateCheckoutDto,
   ) {
     return this.subscriptionsService.createCheckoutSession(user.userId, dto.plan);

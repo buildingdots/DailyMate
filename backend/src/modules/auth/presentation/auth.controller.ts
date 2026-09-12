@@ -77,7 +77,7 @@ export class AuthController {
   @ApiBearerAuth(SWAGGER_BEARER_AUTH)
   @ApiOperation({ summary: 'Sign out and revoke refresh token for a device' })
   @ApiNoContentResponse()
-  async logout(@CurrentUser() user: RequestUser, @Body() dto: LogoutDto) {
+  async logout(@CurrentUser() user: RequestUser & object, @Body() dto: LogoutDto) {
     await this.authService.logout(user.userId, dto.deviceId, dto.refreshToken);
   }
 }
