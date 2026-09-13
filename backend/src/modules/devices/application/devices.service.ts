@@ -16,7 +16,11 @@ export class DevicesService {
     private readonly deviceModel: Model<UserDevice>,
   ) {}
 
-  async touchDevice(userId: string, deviceId: string): Promise<void> {
+  async touchDevice(
+    userId: string,
+    deviceId: string,
+    platform: DevicePlatform,
+  ): Promise<void> {
     await this.deviceModel.updateOne(
       { userId: new Types.ObjectId(userId), deviceId },
       {
@@ -24,7 +28,7 @@ export class DevicesService {
         $setOnInsert: {
           userId: new Types.ObjectId(userId),
           deviceId,
-          platform: DevicePlatform.Android,
+          platform,
         },
       },
       { upsert: true },

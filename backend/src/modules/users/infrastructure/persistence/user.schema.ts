@@ -6,7 +6,7 @@ import { WealthTier } from '../../domain/wealth-tier';
 
 @Schema({ _id: false })
 export class AuthProviderSchema {
-  @Prop({ required: true, enum: AuthProviderType })
+  @Prop({ type: String, required: true, enum: AuthProviderType })
   provider: AuthProviderType;
 
   @Prop()
@@ -39,10 +39,16 @@ export class UserDocument {
   @Prop({ default: false })
   emailVerified: boolean;
 
-  @Prop({ enum: UserStatus, default: UserStatus.Active })
+  @Prop()
+  emailVerificationDeadlineAt?: Date;
+
+  @Prop()
+  emailVerificationExpiredAt?: Date;
+
+  @Prop({ type: String, enum: UserStatus, default: UserStatus.Active })
   status: UserStatus;
 
-  @Prop({ enum: WealthTier })
+  @Prop({ type: String, enum: WealthTier })
   wealthTier?: WealthTier;
 
   @Prop()
@@ -55,5 +61,9 @@ export class UserDocument {
 export type User = HydratedDocument<UserDocument>;
 export const UserSchema = SchemaFactory.createForClass(UserDocument);
 
-UserSchema.index({ email: 1 });
 UserSchema.index({ status: 1 });
+UserSchema.index({
+  emailVerified: 1,
+  status: 1,
+  emailVerificationDeadlineAt: 1,
+});

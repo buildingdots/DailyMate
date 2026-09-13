@@ -24,7 +24,7 @@ export class SubscriptionsService {
 
   constructor(
     @InjectModel(SubscriptionDocument.name)
-    private readonly subscriptionModel: Model<Subscription>,
+    private readonly subscriptionModel: Model<SubscriptionDocument>,
     private readonly usersService: UsersService,
     private readonly configService: ConfigService,
   ) {
@@ -86,7 +86,10 @@ export class SubscriptionsService {
     }
 
     const priceId = this.getPriceId(plan);
-    const appUrl = this.configService.get<string>('appUrl', 'http://localhost:3000');
+    const appUrl = this.configService.get<string>(
+      'appUrl',
+      'http://localhost:3000',
+    );
 
     const session = await this.stripe.checkout.sessions.create({
       customer: stripeCustomerId,
@@ -108,7 +111,9 @@ export class SubscriptionsService {
       throw new BadRequestException('Stripe is not configured');
     }
 
-    const webhookSecret = this.configService.get<string>('stripe.webhookSecret');
+    const webhookSecret = this.configService.get<string>(
+      'stripe.webhookSecret',
+    );
     if (!webhookSecret) {
       throw new BadRequestException('Stripe webhook secret is not configured');
     }
@@ -121,22 +126,16 @@ export class SubscriptionsService {
 
     switch (event.type) {
       case 'checkout.session.completed':
-        await this.onCheckoutCompleted(
-          event.data.object as Stripe.Checkout.Session,
-        );
+        await this.onCheckoutCompleted(event.data.object);
         break;
       case 'customer.subscription.updated':
-        await this.onSubscriptionUpdated(
-          event.data.object as Stripe.Subscription,
-        );
+        await this.onSubscriptionUpdated(event.data.object);
         break;
       case 'customer.subscription.deleted':
-        await this.onSubscriptionDeleted(
-          event.data.object as Stripe.Subscription,
-        );
+        await this.onSubscriptionDeleted(event.data.object);
         break;
       case 'invoice.payment_failed':
-        await this.onPaymentFailed(event.data.object as Stripe.Invoice);
+        await this.onPaymentFailed(event.data.object);
         break;
       default:
         break;
@@ -162,9 +161,8 @@ export class SubscriptionsService {
       return;
     }
 
-    const stripeSub = await this.stripe.subscriptions.retrieve(
-      stripeSubscriptionId,
-    );
+    const stripeSub =
+      await this.stripe.subscriptions.retrieve(stripeSubscriptionId);
 
     await this.updateFromStripeSubscription(userId, plan, stripeSub);
   }
@@ -200,10 +198,12 @@ export class SubscriptionsService {
   }
 
   private async onPaymentFailed(invoice: Stripe.Invoice) {
+    const stripeSubscription =
+      invoice.parent?.subscription_details?.subscription;
     const stripeSubscriptionId =
-      typeof invoice.subscription === 'string'
-        ? invoice.subscription
-        : invoice.subscription?.id;
+      typeof stripeSubscription === 'string'
+        ? stripeSubscription
+        : stripeSubscription?.id;
 
     if (!stripeSubscriptionId) return;
 
@@ -218,11 +218,12 @@ export class SubscriptionsService {
     plan: SubscriptionPlan,
     stripeSub: Stripe.Subscription,
   ) {
-    const periodStart = stripeSub.current_period_start
-      ? new Date(stripeSub.current_period_start * 1000)
+    const subscriptionItem = stripeSub.items.data[0];
+    const periodStart = subscriptionItem?.current_period_start
+      ? new Date(subscriptionItem.current_period_start * 1000)
       : undefined;
-    const periodEnd = stripeSub.current_period_end
-      ? new Date(stripeSub.current_period_end * 1000)
+    const periodEnd = subscriptionItem?.current_period_end
+      ? new Date(subscriptionItem.current_period_end * 1000)
       : undefined;
 
     await this.subscriptionModel.updateOne(

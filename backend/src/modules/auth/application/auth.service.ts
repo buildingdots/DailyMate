@@ -22,6 +22,11 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AppleAuthDto, GoogleAuthDto } from './dto/oauth.dto';
 import { toUserResponse } from '../../users/application/mappers/user.mapper';
+import { DevicePlatform } from '../../devices/domain/device-platform';
+import {
+  EmailVerificationRequiredResponse,
+  EmailVerificationService,
+} from './email-verification.service';
 
 export interface AuthTokens {
   accessToken: string;
@@ -47,17 +52,16 @@ export class AuthService {
     private readonly subscriptionsService: SubscriptionsService,
     private readonly devicesService: DevicesService,
     private readonly oauthService: OAuthService,
+    private readonly emailVerificationService: EmailVerificationService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     @InjectModel(RefreshTokenDocument.name)
     private readonly refreshTokenModel: Model<RefreshToken>,
   ) {
-    this.accessSecret = this.configService.getOrThrow<string>(
-      'jwt.accessSecret',
-    );
-    this.refreshSecret = this.configService.getOrThrow<string>(
-      'jwt.refreshSecret',
-    );
+    this.accessSecret =
+      this.configService.getOrThrow<string>('jwt.accessSecret');
+    this.refreshSecret =
+      this.configService.getOrThrow<string>('jwt.refreshSecret');
     this.accessExpiresIn = this.configService.get<string>(
       'jwt.accessExpiresIn',
       '15m',
@@ -68,7 +72,7 @@ export class AuthService {
     );
   }
 
-  async register(dto: RegisterDto): Promise<AuthResponse> {
+  async register(dto: RegisterDto): Promise<EmailVerificationRequiredResponse> {
     const passwordHash = await bcrypt.hash(dto.password, 12);
     const user = await this.usersService.createUser({
       email: dto.email,
@@ -78,9 +82,8 @@ export class AuthService {
     });
 
     await this.subscriptionsService.createFreeSubscription(user._id.toString());
-    await this.devicesService.touchDevice(user._id.toString(), dto.deviceId);
 
-    return this.buildAuthResponse(user, dto.deviceId);
+    return this.emailVerificationService.start(user);
   }
 
   async login(dto: LoginDto): Promise<AuthResponse> {
@@ -94,8 +97,24 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    await this.devicesService.touchDevice(user._id.toString(), dto.deviceId);
+    await this.emailVerificationService.assertCanAuthenticate(user);
+    await this.devicesService.touchDevice(
+      user._id.toString(),
+      dto.deviceId,
+      dto.platform,
+    );
     return this.buildAuthResponse(user, dto.deviceId);
+  }
+
+  async verifyEmailLink(token: string): Promise<string> {
+    const user = await this.emailVerificationService.verifyByToken(token);
+    return user.email;
+  }
+
+  resendEmailVerification(
+    email: string,
+  ): Promise<EmailVerificationRequiredResponse> {
+    return this.emailVerificationService.resend(email);
   }
 
   async loginWithGoogle(dto: GoogleAuthDto): Promise<AuthResponse> {
@@ -107,6 +126,7 @@ export class AuthService {
       profile.name ?? '',
       profile.picture,
       dto.deviceId,
+      dto.platform,
     );
   }
 
@@ -121,6 +141,7 @@ export class AuthService {
       fullName,
       undefined,
       dto.deviceId,
+      dto.platform,
     );
   }
 
@@ -140,6 +161,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid or expired refresh token');
     }
+    await this.emailVerificationService.assertCanAuthenticate(user);
 
     stored.revoked = true;
     stored.revokedAt = new Date();
@@ -176,6 +198,7 @@ export class AuthService {
     fullName: string,
     avatarUrl?: string,
     deviceId?: string,
+    platform?: DevicePlatform,
   ): Promise<AuthResponse> {
     if (!email) {
       throw new BadRequestException('OAuth provider did not return an email');
@@ -205,11 +228,17 @@ export class AuthService {
       }
     }
 
+    await this.emailVerificationService.assertCanAuthenticate(user);
+
     if (!deviceId) {
       throw new BadRequestException('deviceId is required');
     }
 
-    await this.devicesService.touchDevice(user._id.toString(), deviceId);
+    await this.devicesService.touchDevice(
+      user._id.toString(),
+      deviceId,
+      platform ?? DevicePlatform.Unknown,
+    );
     return this.buildAuthResponse(user, deviceId);
   }
 
@@ -239,9 +268,12 @@ export class AuthService {
     deviceId: string,
   ): Promise<AuthTokens> {
     const accessToken = this.jwtService.sign<{ sub: string; email: string }>(
-        { sub: userId, email },
-        { secret: this.accessSecret, expiresIn: this.parseDurationToMs(this.accessExpiresIn) as number },
-      ) as string;
+      { sub: userId, email },
+      {
+        secret: this.accessSecret,
+        expiresIn: this.parseDurationToMs(this.accessExpiresIn),
+      },
+    );
 
     const refreshToken = randomBytes(48).toString('hex');
     const refreshExpiresMs = this.parseDurationToMs(this.refreshExpiresIn);

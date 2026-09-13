@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { DevicePlatform } from '../../../devices/domain/device-platform';
 
 export class LoginDto {
-  @ApiProperty({ example: 'alex.morgan@email.com' })
+  @ApiProperty({ example: 'test@test.com' })
   @IsEmail()
   email: string;
 
@@ -17,4 +24,8 @@ export class LoginDto {
   @MinLength(1)
   @MaxLength(128)
   deviceId: string;
+
+  @ApiProperty({ description: 'Client-generated device platform' })
+  @IsEnum(DevicePlatform)
+  platform: DevicePlatform;
 }

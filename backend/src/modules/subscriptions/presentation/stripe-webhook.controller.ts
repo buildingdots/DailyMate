@@ -5,7 +5,12 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
-import { ApiExcludeController, ApiHeader, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiExcludeController,
+  ApiHeader,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Request } from 'express';
 import { Public } from '../../../common/decorators/public.decorator';
 import { SubscriptionsService } from '../application/subscriptions.service';
@@ -25,7 +30,9 @@ export class StripeWebhookController {
     @Headers('stripe-signature') signature: string,
   ) {
     if (!req.rawBody) {
-      throw new BadRequestException('Missing raw body for webhook verification');
+      throw new BadRequestException(
+        'Missing raw body for webhook verification',
+      );
     }
 
     if (!signature) {

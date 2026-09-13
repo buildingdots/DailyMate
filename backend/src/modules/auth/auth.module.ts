@@ -6,6 +6,12 @@ import { UsersModule } from '../users/users.module';
 import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { DevicesModule } from '../devices/devices.module';
 import { AuthService } from './application/auth.service';
+import { EmailDeliveryService } from './application/email-delivery.service';
+import { EmailVerificationService } from './application/email-verification.service';
+import {
+  EmailVerificationTokenDocument,
+  EmailVerificationTokenSchema,
+} from './infrastructure/persistence/email-verification-token.schema';
 import {
   RefreshTokenDocument,
   RefreshTokenSchema,
@@ -20,6 +26,10 @@ import { AuthController } from './presentation/auth.controller';
     SubscriptionsModule,
     DevicesModule,
     MongooseModule.forFeature([
+      {
+        name: EmailVerificationTokenDocument.name,
+        schema: EmailVerificationTokenSchema,
+      },
       { name: RefreshTokenDocument.name, schema: RefreshTokenSchema },
     ]),
     JwtModule.registerAsync({
@@ -31,7 +41,13 @@ import { AuthController } from './presentation/auth.controller';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, OAuthService, JwtStrategy],
+  providers: [
+    AuthService,
+    EmailDeliveryService,
+    EmailVerificationService,
+    OAuthService,
+    JwtStrategy,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

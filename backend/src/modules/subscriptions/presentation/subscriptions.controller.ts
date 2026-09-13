@@ -36,6 +36,9 @@ export class SubscriptionsController {
     @CurrentUser() user: RequestUser & object,
     @Body() dto: CreateCheckoutDto,
   ) {
-    return this.subscriptionsService.createCheckoutSession(user.userId, dto.plan);
+    return this.subscriptionsService.createCheckoutSession(
+      user.userId,
+      dto.plan,
+    );
   }
 }

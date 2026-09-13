@@ -16,14 +16,20 @@ export class OAuthService {
   private readonly appleClientId: string | undefined;
 
   constructor(private readonly configService: ConfigService) {
-    const googleClientId = this.configService.get<string>('oauth.googleClientId');
-    this.googleClient = googleClientId ? new OAuth2Client(googleClientId) : null;
+    const googleClientId = this.configService.get<string>(
+      'oauth.googleClientId',
+    );
+    this.googleClient = googleClientId
+      ? new OAuth2Client(googleClientId)
+      : null;
     this.appleClientId = this.configService.get<string>('oauth.appleClientId');
   }
 
   async verifyGoogleToken(idToken: string): Promise<OAuthProfile> {
     if (!this.googleClient) {
-      throw new UnauthorizedException('Google authentication is not configured');
+      throw new UnauthorizedException(
+        'Google authentication is not configured',
+      );
     }
 
     const ticket = await this.googleClient.verifyIdToken({

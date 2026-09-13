@@ -10,7 +10,7 @@ export class UserDeviceDocument {
   @Prop({ required: true })
   deviceId: string;
 
-  @Prop({ required: true, enum: DevicePlatform })
+  @Prop({ type: String, required: true, enum: DevicePlatform })
   platform: DevicePlatform;
 
   @Prop()

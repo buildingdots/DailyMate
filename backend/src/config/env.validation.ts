@@ -69,11 +69,45 @@ export class EnvironmentVariables {
   @IsOptional()
   APP_URL?: string;
 
+  @IsString()
+  @IsOptional()
+  API_PUBLIC_URL?: string;
+
   @IsOptional()
   SWAGGER_ENABLED?: string;
+
+  @IsString()
+  @IsOptional()
+  EMAIL_VERIFICATION_CRON_ENABLED?: string;
+
+  @IsString()
+  @IsOptional()
+  EMAIL_FROM?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_HOST?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_PORT?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_SECURE?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_USER?: string;
+
+  @IsString()
+  @IsOptional()
+  SMTP_PASS?: string;
 }
 
-export function validateEnv(config: Record<string, unknown>): EnvironmentVariables {
+export function validateEnv(
+  config: Record<string, unknown>,
+): EnvironmentVariables {
   const validated = plainToInstance(EnvironmentVariables, config, {
     enableImplicitConversion: true,
   });

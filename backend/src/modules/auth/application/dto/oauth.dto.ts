@@ -1,5 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEnum,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { DevicePlatform } from '../../../devices/domain/device-platform';
 
 export class GoogleAuthDto {
   @ApiProperty({ description: 'Google ID token from the mobile client' })
@@ -11,6 +18,10 @@ export class GoogleAuthDto {
   @MinLength(1)
   @MaxLength(128)
   deviceId: string;
+
+  @ApiProperty({ description: 'Client-generated device platform' })
+  @IsEnum(DevicePlatform)
+  platform: DevicePlatform;
 }
 
 export class AppleAuthDto {
@@ -29,4 +40,8 @@ export class AppleAuthDto {
   @MinLength(1)
   @MaxLength(128)
   deviceId: string;
+
+  @ApiProperty({ description: 'Client-generated device platform' })
+  @IsEnum(DevicePlatform)
+  platform: DevicePlatform;
 }

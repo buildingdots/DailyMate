@@ -40,13 +40,19 @@ export class DevicesController {
   @Post()
   @ApiOperation({ summary: 'Register or update a device' })
   @ApiOkResponse({ type: DeviceResponseDto })
-  register(@CurrentUser() user: RequestUser & object, @Body() dto: RegisterDeviceDto) {
+  register(
+    @CurrentUser() user: RequestUser & object,
+    @Body() dto: RegisterDeviceDto,
+  ) {
     return this.devicesService.registerDevice(user.userId, dto);
   }
 
   @Patch(':deviceId')
   @ApiOperation({ summary: 'Update device metadata or push token' })
-  @ApiParam({ name: 'deviceId', description: 'Client-generated device identifier' })
+  @ApiParam({
+    name: 'deviceId',
+    description: 'Client-generated device identifier',
+  })
   @ApiOkResponse({ type: DeviceResponseDto })
   update(
     @CurrentUser() user: RequestUser & object,
@@ -59,7 +65,10 @@ export class DevicesController {
   @Delete(':deviceId')
   @HttpCode(204)
   @ApiOperation({ summary: 'Remove a registered device' })
-  @ApiParam({ name: 'deviceId', description: 'Client-generated device identifier' })
+  @ApiParam({
+    name: 'deviceId',
+    description: 'Client-generated device identifier',
+  })
   @ApiNoContentResponse()
   async remove(
     @CurrentUser() user: RequestUser & object,

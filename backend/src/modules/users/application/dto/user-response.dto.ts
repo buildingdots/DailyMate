@@ -7,7 +7,7 @@ export class UserResponseDto {
   @ApiProperty()
   id: string;
 
-  @ApiProperty({ example: 'alex.morgan@email.com' })
+  @ApiProperty({ example: 'test@test.com' })
   email: string;
 
   @ApiProperty({ example: 'Alex Morgan' })
@@ -21,6 +21,9 @@ export class UserResponseDto {
 
   @ApiProperty()
   emailVerified: boolean;
+
+  @ApiPropertyOptional()
+  emailVerificationDeadlineAt?: Date;
 
   @ApiProperty({ enum: UserStatus })
   status: UserStatus;

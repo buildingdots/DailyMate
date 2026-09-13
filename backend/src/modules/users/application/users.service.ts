@@ -8,10 +8,7 @@ import { Model } from 'mongoose';
 import { AuthProviderType } from '../domain/auth-provider';
 import { UserStatus } from '../domain/user-status';
 import { WealthTier } from '../domain/wealth-tier';
-import {
-  User,
-  UserDocument,
-} from '../infrastructure/persistence/user.schema';
+import { User, UserDocument } from '../infrastructure/persistence/user.schema';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { toUserResponse } from './mappers/user.mapper';
 
@@ -32,11 +29,17 @@ export class UsersService {
   ) {}
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.userModel.findOne({ email: email.toLowerCase(), status: { $ne: UserStatus.Deleted } });
+    return this.userModel.findOne({
+      email: email.toLowerCase(),
+      status: { $ne: UserStatus.Deleted },
+    });
   }
 
   async findById(userId: string): Promise<User | null> {
-    return this.userModel.findOne({ _id: userId, status: { $ne: UserStatus.Deleted } });
+    return this.userModel.findOne({
+      _id: userId,
+      status: { $ne: UserStatus.Deleted },
+    });
   }
 
   async findByProvider(
@@ -47,6 +50,17 @@ export class UsersService {
       authProviders: { $elemMatch: { provider, providerId } },
       status: { $ne: UserStatus.Deleted },
     });
+  }
+
+  async findExpiredEmailVerificationUsers(now: Date): Promise<User[]> {
+    return this.userModel
+      .find({
+        emailVerified: false,
+        status: UserStatus.Active,
+        emailVerificationDeadlineAt: { $lte: now },
+        authProviders: { $elemMatch: { provider: AuthProviderType.Email } },
+      })
+      .limit(100);
   }
 
   async createUser(input: CreateUserInput): Promise<User> {

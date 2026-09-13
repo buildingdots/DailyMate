@@ -26,7 +26,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
       if (typeof exceptionResponse === 'string') {
         message = exceptionResponse;
-      } else if (typeof exceptionResponse === 'object' && exceptionResponse !== null) {
+      } else if (
+        typeof exceptionResponse === 'object' &&
+        exceptionResponse !== null
+      ) {
         const body = exceptionResponse as Record<string, unknown>;
         message = (body.message as string) ?? message;
         code = (body.error as string) ?? code;

@@ -4,6 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UsersService } from '../../../users/application/users.service';
 import { RequestUser } from '../../../../common/types/request-user';
+import { EmailVerificationService } from '../../application/email-verification.service';
 
 interface JwtPayload {
   sub: string;
@@ -15,6 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     configService: ConfigService,
     private readonly usersService: UsersService,
+    private readonly emailVerificationService: EmailVerificationService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -28,6 +30,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException();
     }
+    await this.emailVerificationService.assertCanAuthenticate(user);
 
     return {
       userId: user._id.toString(),

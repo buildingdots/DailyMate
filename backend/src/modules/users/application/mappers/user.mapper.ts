@@ -9,6 +9,7 @@ export function toUserResponse(user: User): UserResponseDto {
     phone: user.phone,
     avatarUrl: user.avatarUrl,
     emailVerified: user.emailVerified,
+    emailVerificationDeadlineAt: user.emailVerificationDeadlineAt,
     status: user.status,
     authProviders: user.authProviders.map((p) => p.provider),
     wealthTier: user.wealthTier,

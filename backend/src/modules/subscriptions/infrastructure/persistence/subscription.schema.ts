@@ -7,13 +7,26 @@ import {
 
 @Schema({ timestamps: true, collection: 'subscriptions' })
 export class SubscriptionDocument {
-  @Prop({ type: Types.ObjectId, ref: 'UserDocument', required: true, unique: true })
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'UserDocument',
+    required: true,
+    unique: true,
+  })
   userId: Types.ObjectId;
 
-  @Prop({ enum: SubscriptionPlan, default: SubscriptionPlan.Free })
+  @Prop({
+    type: String,
+    enum: SubscriptionPlan,
+    default: SubscriptionPlan.Free,
+  })
   plan: SubscriptionPlan;
 
-  @Prop({ enum: SubscriptionStatus, default: SubscriptionStatus.Active })
+  @Prop({
+    type: String,
+    enum: SubscriptionStatus,
+    default: SubscriptionStatus.Active,
+  })
   status: SubscriptionStatus;
 
   @Prop()
@@ -36,6 +49,5 @@ export type Subscription = HydratedDocument<SubscriptionDocument>;
 export const SubscriptionSchema =
   SchemaFactory.createForClass(SubscriptionDocument);
 
-SubscriptionSchema.index({ userId: 1 });
 SubscriptionSchema.index({ stripeCustomerId: 1 });
 SubscriptionSchema.index({ stripeSubscriptionId: 1 });
